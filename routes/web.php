@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get("/", "WelcomeController@viewWelcome");
+//Route::get("/", "WelcomeController@viewWelcome");
 Route::get("/dashboard", "WelcomeController@viewDashboard");
 
 /*Route::get('/', function () {
@@ -23,6 +23,6 @@ Route::get('/test', function () {
     return view('test');
 });
 
-Route::any('/logout', function() {
-	return view("welcome");
-});
+Auth::routes();
+
+Route::get('/', 'HomeController@index')->name('home');
