@@ -84,6 +84,7 @@ class RouteServiceProvider extends ServiceProvider
             'namespace' => $this->namespace,
         ], function ($router) {
             require base_path('routes/test.php');
+            require base_path('routes/test-coin.php');
         });
     }
 }
