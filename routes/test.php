@@ -1,14 +1,15 @@
 <?php
 
-use App\Business;
-Route::get("test-business", function() {
+use App\Coin;
+Route::get("test-coin", function() {
 	try {
-		$obj = new Business;
-		$obj->number_identifer = "10435350378";
-		$obj->name = "Fernando Jacobo Quiroz Cabanillas";
+		$obj = new Coin;
+		$obj->name = "Kwacha";
+		$obj->code = "MWK";
+		$obj->symbol = "MK";
 		$obj->save();
-
-		echo "Exito";
+  
+		echo "Registro Ingresado";
 	} catch (Exception $e) {
 		echo $e->getMessage();
 	}
