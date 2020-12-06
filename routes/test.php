@@ -18,10 +18,10 @@ use App\Coin;
 Route::get("test-coin", function() {
 	try {
 		$obj = new Coin;
-		$obj->name= "Tengue kazajo";
-		$obj->code = "KZT";
-		$obj->symbol = "₸";
-		$obj->change_type = "2.80";
+		$obj->name= "Kip";
+		$obj->code = "₭";
+		$obj->symbol = "LAK";
+		$obj->change_type = "1.80";
 		$obj->status = "1";
 		$obj->save();
 
