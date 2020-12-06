@@ -13,3 +13,20 @@ Route::get("test-business", function() {
 		echo $e->getMessage();
 	}
 });
+
+use App\Coin;
+Route::get("test-coin", function() {
+	try {
+		$obj = new Coin;
+		$obj->name= "Tengue kazajo";
+		$obj->code = "KZT";
+		$obj->symbol = "₸";
+		$obj->change_type = "2.80";
+		$obj->status = "1";
+		$obj->save();
+
+		echo "Exito";
+	} catch (Exception $e) {
+		echo $e->getMessage();
+	}
+});
