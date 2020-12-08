@@ -23,7 +23,7 @@
                         <a class="dropdown-item" href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                               {{trans('auth.logout.title_logout')}}
                         </a>
-                        <form id="logout-form" action="" method="POST" style="display: none;">
+                        <form id="logout-form" action="/logout" method="POST" style="display: none;">
                             @csrf
                         </form>
                     </div>
