@@ -34,9 +34,13 @@ Route::get('/profile', function () {
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
 Route::resource("/user", "UserController");
 Route::resource("/business", "BusinessController");
 Route::resource("/profile", "ProfileController");
 >>>>>>> Stashed changes
+=======
+Route::resource("/user", "UserController");
+>>>>>>> cb43f46d0d8973605693a9afa6680f5f65f0e3e1

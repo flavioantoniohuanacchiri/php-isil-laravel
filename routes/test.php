@@ -14,6 +14,7 @@ Route::get("test-business", function() {
 	}
 });
 
+<<<<<<< HEAD
 use App\Coin;
 Route::get("test-coin", function() {
 	try {
@@ -48,10 +49,15 @@ Route::get("test-profile", function() {
 });
 
 
+=======
+>>>>>>> cb43f46d0d8973605693a9afa6680f5f65f0e3e1
 Route::get("set-cache", function() {
 	\Cache::put("isil", "isil-2020");
 });
 Route::get("get-cache", function() {
 	echo \Cache::get("isil");
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> cb43f46d0d8973605693a9afa6680f5f65f0e3e1
 });
