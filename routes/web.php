@@ -23,18 +23,15 @@ Route::get('/test', function () {
     return view('test');
 });
 
-/*Route::get('/business', function () {
-    return view('business');
-});
-
-Route::get('/profile', function () {
-    return view('profile');
-});*/
-
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
+
 Route::resource("/user", "UserController");
 Route::resource("/business", "BusinessController");
 Route::resource("/profile", "ProfileController");
+
+Route::post("/user/store", "UserController@store");
+Route::get("/user/show", "UserController@show");
+

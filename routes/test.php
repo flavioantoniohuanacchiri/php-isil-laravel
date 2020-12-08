@@ -4,8 +4,8 @@ use App\Business;
 Route::get("test-business", function() {
 	try {
 		$obj = new Business;
-		$obj->number_identifer = "10724465120";
-		$obj->name = "Lucia Andrea Quinto Ascurra";
+		$obj->number_identifer = "10435350378";
+		$obj->name = "Fernando Jacobo Quiroz Cabanillas";
 		$obj->save();
 
 		echo "Exito";
@@ -13,6 +13,7 @@ Route::get("test-business", function() {
 		echo $e->getMessage();
 	}
 });
+
 
 use App\Coin;
 Route::get("test-coin", function() {

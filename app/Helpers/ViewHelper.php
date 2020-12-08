@@ -2,7 +2,7 @@
 
 class ViewHelper
 {
-	public static function allButtons($data)
+	public static function allButtons($data = [])
 	{
 		$buttons = [
 			"E" => [
