@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Helpers\ViewHelper;
 use App\User;
 use App\Profile;
+use App\Business;
 use DB;
 
 class UserController extends Controller
@@ -15,7 +16,8 @@ class UserController extends Controller
 			"name" => "Usuarios",
 			"url_controller" => "user",
 			"url" => "user",
-			"profile" => Profile::where("status", 1)->get()->toArray()
+			"profile" => Profile::where("status", 1)->get()->toArray(),
+			"business" => Business::get()->toArray()
 		];
 		if ($request->ajax()) {
 			return datatables()->of(
@@ -50,13 +52,15 @@ class UserController extends Controller
 				}
 				$obj = User::find($userId);
 			}
-			$obj->name = $request->full_name." ".$request->full_name;
+			$obj->name = $request->full_name." ".$request->last_name;
 			$obj->full_name = $request->full_name;
 			$obj->last_name = $request->last_name;
 			$obj->email = $request->email;
 			$obj->user_name = $request->user_name;
 			$obj->document_number = $request->document_number;
 			$obj->profile_id = $request->profile_id;
+			$obj->business_id = $request->business_id; 
+			$obj->status = $request->status;
 
 			if ($request->password !="") {
 				$obj->password = \Hash::make($request->password);

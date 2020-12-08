@@ -5,4 +5,9 @@ use Illuminate\Database\Eloquent\Model;
 class Profile extends Model
 {
 	protected $table = "profile";
+
+	protected function serializeDate(\DateTimeInterface $date)
+    {
+        return $date->format("Y-m-d h:i:s a");
+    }
 }

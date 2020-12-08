@@ -25,12 +25,7 @@
 <script type="text/javascript">
     columnsTable = [
     	{"data": "name"},
-        /*{"data": "full_name"},
-        {"data": "last_name"},
-        {"data": "user_name"},*/
         {"data": "email"},
-        /*{"data": "status"},
-        {"data": "num_intentos"},*/
         {"data" : "updated_at"},
         {"data": 'action', name: 'action', orderable: false, searchable: false}
     ];
@@ -67,9 +62,13 @@
     </div>
     <div class="form-group" id="div-business" style="display: none;">
         <label>Empresa</label>
-        <select name="business_id" class="form-control select2" data-placeholder="Seleccione una Empresa" id="businessId" style="width: 100%;">
+        <select name="business_id" class="form-control select2" data-placeholder="Seleccione una Empresa" id="business_id" style="width: 100%;">
             <option value="">Seleccione</option>
-            
+          @if(isset($site["business"]))
+                @foreach($site["business"] as $key => $value)
+                <option value="{{$value['id']}}">{{$value['name']}}</option>
+                @endforeach
+            @endif   
         </select>
     </div>
     <div class="form-group">

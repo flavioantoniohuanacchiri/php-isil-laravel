@@ -29,9 +29,16 @@ Route::get('/', 'HomeController@index')->name('home');
 
 
 Route::resource("/user", "UserController");
-Route::resource("/business", "BusinessController");
-Route::resource("/profile", "ProfileController");
-
+Route::get("/user", "UserController@index");
 Route::post("/user/store", "UserController@store");
 Route::get("/user/show", "UserController@show");
 
+Route::resource("/business", "BusinessController");
+Route::get("/business", "BusinessController@index");
+Route::post("/business/store", "BusinessController@store");
+Route::get("/business/show", "BusinessController@show");
+
+Route::resource("/profile", "ProfileController");
+Route::get("/profile", "ProfileController@index");
+Route::post("/profile/store", "ProfileController@store");
+Route::get("/profile/show", "ProfileController@show");
