@@ -71,10 +71,16 @@
 @include("modals._modal_setting")
 @stack("modal")
 <script type="text/javascript">
-    var objModel = {name : ""};
+    var objModel = {};
     var confirmDelete = {"confirmButtonText" : "Si Eliminar", "cancelButtonText" : "No, no deseo eliminar!!!"};
     var columnsTable = [];
 </script>
+@if(isset($site))
+    <script type="text/javascript">
+        objModel.name = "";
+        objModel.url_controller = "{{$site['url_controller']}}";
+    </script>
+@endif
 @yield("script_master")
 @endsection
 
@@ -97,9 +103,6 @@
       "info": true,
       "autoWidth": false,
       "responsive": true,
-      "language" :{
-            "url" : "/Spanish.json"
-      }
     });
     $("select").select2();
     if (objModel!=null && objModel !="null") {

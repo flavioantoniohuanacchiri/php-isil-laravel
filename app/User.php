@@ -36,4 +36,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected function serializeDate(\DateTimeInterface $date)
+    {
+        return $date->format("Y-m-d h:i:s a");
+    }
 }
