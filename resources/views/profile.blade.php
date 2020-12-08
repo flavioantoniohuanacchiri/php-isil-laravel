@@ -13,6 +13,7 @@
 <tr>
     <th>Rol</th>
     <th>Status</th>
+    <th>Actualizado</th>
     <th class="column-options">[]</th>
 </tr>
 @endsection
@@ -54,11 +55,11 @@
 @section("content_form_modal")
     <div class="form-group">
         <label>Rol *</label>
-        <input type="text" name="rol" class="form-control" />
+        <input type="text" name="rol" class="form-control" required="required" />
     </div>
     <div class="form-group">
         <label>Estado *</label>
-        <select class="form-control select2" name="status" data-placeholder="Seleccione un Estado" style="width: 100%;">
+        <select class="form-control select2" name="status" data-placeholder="Seleccione un Estado" style="width: 100%;" required="required">
             <option value="">Seleccione</option>
             <option value="1">Activo</option>
             <option value="0">Inactivo</option>
