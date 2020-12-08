@@ -8,7 +8,7 @@ var Default = {
 	                "serverSide": true,
 	                "ajax": {
 	                    "url": "/"+urlController,
-	                    "type": "POST",
+	                    "type": "GET",
 	                    "data" : {
 	                        _token : $("[name=_token]").val(),
 	                        url : objModel.url
