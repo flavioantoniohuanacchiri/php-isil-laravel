@@ -13,3 +13,8 @@ Route::get("test-business", function() {
 		echo $e->getMessage();
 	}
 });
+
+Route::get("set-cache", function(){
+   \Cache::put("isil","isil-2020");
+
+});
