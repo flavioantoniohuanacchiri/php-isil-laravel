@@ -23,6 +23,20 @@ Route::get('/test', function () {
     return view('test');
 });
 
+/*Route::get('/business', function () {
+    return view('business');
+});
+
+Route::get('/profile', function () {
+    return view('profile');
+});*/
+
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+<<<<<<< Updated upstream
+=======
+Route::resource("/user", "UserController");
+Route::resource("/business", "BusinessController");
+Route::resource("/profile", "ProfileController");
+>>>>>>> Stashed changes

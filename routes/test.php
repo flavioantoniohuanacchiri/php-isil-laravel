@@ -29,4 +29,29 @@ Route::get("test-coin", function() {
 	} catch (Exception $e) {
 		echo $e->getMessage();
 	}
+<<<<<<< Updated upstream
+=======
+});
+
+use App\Profile;
+Route::get("test-profile", function() {
+	try {
+		$obj = new Profile;
+		$obj->name= "Administrador";
+		$obj->code = "Admin";
+		$obj->save();
+
+		echo "Exito";
+	} catch (Exception $e) {
+		echo $e->getMessage();
+	}
+});
+
+
+Route::get("set-cache", function() {
+	\Cache::put("isil", "isil-2020");
+});
+Route::get("get-cache", function() {
+	echo \Cache::get("isil");
+>>>>>>> Stashed changes
 });
