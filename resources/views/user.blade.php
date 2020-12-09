@@ -12,11 +12,11 @@
 @section('columns_head')
 <tr>
     <th>Nombres</th>
-    <th>Apellidos</th>
-    <th>Usuario</th>
+    <!--<th>Apellidos</th>
+    <th>Usuario</th>-->
     <th>Email</th>
-    <th>Estado</th>
-    <th>Intentos</th>
+    <!--<th>Estado</th>
+    <th>Intentos</th>-->
     <th>Actualizado</th>
     <th class="column-options">[]</th>
 </tr>
@@ -24,12 +24,13 @@
 @section("script_master")
 <script type="text/javascript">
     columnsTable = [
-        {"data": "full_name"},
+    	{"data": "name"},
+        /*{"data": "full_name"},
         {"data": "last_name"},
-        {"data": "user_name"},
+        {"data": "user_name"},*/
         {"data": "email"},
-        {"data": "status"},
-        {"data": "num_intentos"},
+        /*{"data": "status"},
+        {"data": "num_intentos"},*/
         {"data" : "updated_at"},
         {"data": 'action', name: 'action', orderable: false, searchable: false}
     ];
@@ -95,7 +96,11 @@
         <label>Perfiles</label>
         <select name="profile_id" class="form-control select2" data-placeholder="Seleccione un Perfil" style="width: 100%;">
             <option value="">Seleccione</option>
-            
+            @if(isset($site["profile"]))
+            	@foreach($site["profile"] as $key => $value)
+            	<option value="{{$value['id']}}">{{$value['name']}}</option>
+            	@endforeach
+            @endif
         </select>
     </div>
     <div class="form-group">
