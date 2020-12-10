@@ -64,8 +64,22 @@ class BusinessController extends Controller
 	}
 	public function show(Request $request)
 	{
+		$keyCache = "showBusiness";
 		if (!is_null($request->masterId)) {
-			return response(["rst" => 1, "obj" => Business::find($request->masterId)]);
+			$keyCache.="_".$request->masterId;
+			$masterId = $request->masterId;
+			$obj = \Cache::get($keyCache);
+			if (!$obj) {
+				$obj = \Cache::remember(
+					$keyCache,
+					1*60*60,
+					function() use ($masterId) {
+						return Business::find($masterId);
+					}
+				);
+			}
+			return response(["rst" => 1, "obj" => $obj]);
+			//return response(["rst" => 1, "obj" => User::with("business", "businessTwo")->find($request->masterId)]);
 		}
 		return response(["rst" => 2, "obj" => [], "msj" => ""]);
 	}
