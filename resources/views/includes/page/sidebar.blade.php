@@ -42,6 +42,14 @@
                                         </p>
                                     </a>
                                 </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="/business" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>{{trans("layout.sidebar.business")}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                </li>
                             </ul>
                     </a>
             </ul>

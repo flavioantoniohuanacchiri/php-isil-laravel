@@ -4,7 +4,8 @@ return [
 	"sidebar" => [
 		"master" => "Mantenimiento",
 		"user" => "Usuarios",
-		"profile" => "Perfiles"
+		"profile" => "Perfiles",
+		"business" => "Empresas"
 	]
 ];
 
