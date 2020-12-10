@@ -68,12 +68,11 @@ class UserController extends Controller
 			DB::rollback();
 			return response(["rst" => 2, "obj" => [], "msj" => $e->getMessage()]);
 		}
-		print_r($request->all()); dd();
 	}
 	public function show(Request $request)
 	{
 		if (!is_null($request->masterId)) {
-			return response(["rst" => 1, "obj" => User::find($request->masterId)]);
+			return response(["rst" => 1, "obj" => User::with("business", "businessTwo")->find($request->masterId)]);
 		}
 		return response(["rst" => 2, "obj" => [], "msj" => ""]);
 	}
@@ -83,6 +82,12 @@ class UserController extends Controller
 	}
 	public function destroy(Request $request)
 	{
-		
+		$masterId = $request->has("masterId")? $request->masterId : null;
+		$obj = User::find($masterId);
+		if (!is_null($obj)) {
+			$obj->delete();
+			return response(["rst" => 1, "msj" => "Usuario Eliminado Correctamente"]);
+		}
+		return response(["rst" => 2, "msj" => "Hubo un Error"]);
 	}
 }
