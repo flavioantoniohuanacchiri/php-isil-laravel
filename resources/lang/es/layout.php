@@ -1,11 +1,11 @@
 <?php 
 
-return[
-	"sidebar" => {
-		"master" => "Mantenimientos";
-		"user" => "Usuarios";
-		"profile" => "Perfiles";
-	}
-]
+return [
+	"sidebar" => [
+		"master" => "Mantenimiento",
+		"user" => "Usuarios",
+		"profile" => "Perfiles"
+	]
+];
 
  ?>
