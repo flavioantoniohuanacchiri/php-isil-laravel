@@ -76,6 +76,12 @@ class BusinessController extends Controller
 	}
 	public function destroy(Request $request)
 	{
-		
+		$masterId = $request->has("masterId")? $request->masterId : null;
+		$obj = Business::find($masterId);
+		if (!is_null($obj)) {
+			$obj->delete();
+			return response(["rst" => 1, "msj" => "Empresa Eliminada Correctamente"]);
+		}
+		return response(["rst" => 2, "msj" => "Hubo un Error"]);
 	}
 }

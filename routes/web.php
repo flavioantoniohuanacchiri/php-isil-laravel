@@ -32,13 +32,16 @@ Route::resource("/user", "UserController");
 Route::get("/user", "UserController@index");
 Route::post("/user/store", "UserController@store");
 Route::get("/user/show", "UserController@show");
+Route::post("/user/destroy", "UserController@destroy");
 
 Route::resource("/business", "BusinessController");
 Route::get("/business", "BusinessController@index");
 Route::post("/business/store", "BusinessController@store");
 Route::get("/business/show", "BusinessController@show");
+Route::post("/business/destroy", "BusinessController@destroy");
 
 Route::resource("/profile", "ProfileController");
 Route::get("/profile", "ProfileController@index");
 Route::post("/profile/store", "ProfileController@store");
 Route::get("/profile/show", "ProfileController@show");
+Route::post("/profile/destroy", "ProfileController@destroy");
