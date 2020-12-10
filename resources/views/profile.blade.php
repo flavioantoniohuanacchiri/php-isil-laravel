@@ -12,11 +12,8 @@
 @section('columns_head')
 <tr>
     <th>Nombre</th>
-    <!--<th>Apellidos</th>
-    <th>Usuario</th>-->
     <th>Código</th>
-    <!--<th>Estado</th>
-    <th>Estado</th>-->
+    <!--<th>Estado</th>-->
     <th>Actualizado</th>
     <th class="column-options">[]</th>
 </tr>

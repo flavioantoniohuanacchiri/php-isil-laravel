@@ -17,7 +17,7 @@ class UserController extends Controller
 			"url_controller" => "user",
 			"url" => "user",
 			"profile" => Profile::where("status", 1)->get()->toArray(),
-			"business" => Business::get()->toArray()
+			"business" => Business::where("status", 1)->get()->toArray()
 		];
 		if ($request->ajax()) {
 			return datatables()->of(

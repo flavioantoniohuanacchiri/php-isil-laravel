@@ -13,8 +13,7 @@ class BusinessController extends Controller
 		$site = [
 			"name" => "Empresas",
 			"url_controller" => "business",
-			"url" => "business",
-			//"profile" => Profile::where("status", 1)->get()->toArray()
+			"url" => "business"
 		];
 		if ($request->ajax()) {
 			return datatables()->of(

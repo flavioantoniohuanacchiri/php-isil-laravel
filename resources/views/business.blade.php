@@ -15,6 +15,7 @@
     <th>Razón Social</th>
     <th>Dirección</th>
     <th>Ubigeo</th>
+    <th>Estado</th>
     <th>Actualizado</th>
     <th class="column-options">[]</th>
 </tr>
@@ -26,6 +27,7 @@
         {"data": "name"},
         {"data": "address"},
         {"data": "ubigeo"},
+        {"data": "status"},
         {"data" : "updated_at"},
         {"data": 'action', name: 'action', orderable: false, searchable: false}
     ];

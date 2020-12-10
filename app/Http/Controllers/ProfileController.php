@@ -13,8 +13,7 @@ class ProfileController extends Controller
 		$site = [
 			"name" => "Perfiles",
 			"url_controller" => "profile",
-			"url" => "profile",
-			//"profile" => Profile::where("status", 1)->get()->toArray()
+			"url" => "profile"
 		];
 		if ($request->ajax()) {
 			return datatables()->of(
