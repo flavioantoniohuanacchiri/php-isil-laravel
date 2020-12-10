@@ -12,8 +12,6 @@
 @section('columns_head')
 <tr>
     <th>Perfil ID</th>
-    <!--<th>Apellidos</th>
-    <th>Usuario</th>-->
     <th>Perfil</th>
     <th>Descripción</th>
     <th>Estado</th>
@@ -26,10 +24,10 @@
 @section("script_master")
 <script type="text/javascript">
     columnsTable = [
-    	{"data": "perfil_id"},
+    	{"data": "profile_id"},
         {"data": "name"},
         {"data": "descripcion"},
-        {"data": "status"},*/
+        {"data": "status"},
        /*{"data": "status"},
         {"data": "num_intentos"},*/
         {"data" : "updated_at"},
@@ -44,7 +42,7 @@
     functionRowTable = function(nRow, aData) {
         if (aData!=null && aData!="null" && aData["status"] !=null && aData["status"] !="null") {
             let htmlTmp = Master.htmlStatus(aData['status']);
-            $(nRow).find('td:eq(4)').html(htmlTmp);
+            $(nRow).find('td:eq(6)').html(htmlTmp);
         }
     };
     $("#belongs_profile").click(function(e) {

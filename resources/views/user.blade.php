@@ -98,7 +98,7 @@
             <option value="">Seleccione</option>
             @if(isset($site["profile"]))
             	@foreach($site["profile"] as $key => $value)
-            	<option value="{{$value['id']}}">{{$value['name']}}</option>
+            	<option value="{{$value['profile_id']}}">{{$value['name']}}</option>
             	@endforeach
             @endif
         </select>

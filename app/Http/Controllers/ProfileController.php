@@ -12,7 +12,7 @@ class ProfileController extends Controller
 	public function index(Request $request)
 	{
 		$site = [
-			"name" => "profiles",
+			"name" => "profile",
 			"url_controller" => "profile",
 			"url" => "profile",
 		];
@@ -33,11 +33,18 @@ class ProfileController extends Controller
 		DB::beginTransaction();
 		try {
 			$obj = null;
-			$obj = new Profile;
-			$obj = Profile::find($profileId);
+			if (is_null($profileId)) {
+				$objTmp = Profile::where("profile_id", $request->profile_id)->first();
+				$obj = new Profile;
+			}
+			else{
+				$objTmp = Profile::where("profile_id", $request->profile_id)->where("id", "<>", $profileId)->first();
+				$obj = Profile::find($profileId);
+			}
+		
 			
-			$obj->profile_id = $request->profile_id;
-			$obj->name = $request->name." ".$request->name;
+			//$obj->profile_id = $request->profile_id;
+			$obj->name = $request->name;
 			$obj->descripcion = $request->descripcion;
 			$obj->status = $request->status;
 					
@@ -65,6 +72,12 @@ class ProfileController extends Controller
 	}
 	public function destroy(Request $request)
 	{
-		
+		$masterId = $request->has("masterId")? $request->masterId : null;
+		$obj = Profile::find($masterId);
+		if (!is_null($obj)) {
+			$obj->delete();
+			return response(["rst" => 1, "msj" => "Perfil Eliminado Correctamente"]);
+		}
+		return response(["rst" => 2, "msj" => "Hubo un Error"]);
 	}
 }
