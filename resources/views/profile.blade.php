@@ -11,9 +11,7 @@
 @endsection
 @section('columns_head')
 <tr>
-    <th>Nombres</th>
-    <th>Apellidos</th>
-    <th>Roles</th>
+    <th>Rol</th>
     <th>Estado</th>
     <th>Actualizado</th>
     <th class="column-options">[]</th>
@@ -22,8 +20,6 @@
 @section("script_master")
 <script type="text/javascript">
     columnsTable = [
-        {"data": "full_name"},
-        {"data": "last_name"},
         {"data": "rol"},
         {"data": "status"},
         {"data" : "updated_at"},
@@ -67,14 +63,7 @@
             
         </select>
     </div>
-    <div class="form-group">
-        <label>Nombres *</label>
-        <input type="text" name="full_name" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Apellidos *</label>
-        <input type="text" name="last_name" class="form-control" required />
-    </div>
+    
     <div class="form-group">
         <label>Rol *</label>
         <input type="text" name="rol" class="form-control" />
