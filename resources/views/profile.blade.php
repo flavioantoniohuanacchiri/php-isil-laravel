@@ -1,7 +1,7 @@
 @extends('layouts.page')
 @push("css")
 <style type="text/css">
-    #belongs_business{
+    #belongs_profile{
         margin-right: 15px;
     }
 </style>
@@ -11,9 +11,14 @@
 @endsection
 @section('columns_head')
 <tr>
-    <th>Nombre Perfil</th>
+    <th>Perfil ID</th>
+    <!--<th>Apellidos</th>
+    <th>Usuario</th>-->
+    <th>Perfil</th>
     <th>Descripción</th>
     <th>Estado</th>
+    <!--<th>Estado</th>
+    <th>Intentos</th>-->
     <th>Actualizado</th>
     <th class="column-options">[]</th>
 </tr>
@@ -21,14 +26,17 @@
 @section("script_master")
 <script type="text/javascript">
     columnsTable = [
-        {"data": "nombre"},
+    	{"data": "perfil_id"},
+        {"data": "name"},
         {"data": "descripcion"},
-        {"data": "estado"},
+        {"data": "status"},*/
+       /*{"data": "status"},
+        {"data": "num_intentos"},*/
         {"data" : "updated_at"},
         {"data": 'action', name: 'action', orderable: false, searchable: false}
     ];
-    confirmDelete["titleMessage"] = "Eliminación de perfil";
-    confirmDelete["textMessage"] = "¿Desea Eliminar este perfil?";
+    confirmDelete["titleMessage"] = "Eliminación de Perfil";
+    confirmDelete["textMessage"] = "¿Desea Eliminar este Perfil?";
 </script>
 @endsection
 @push("js_master")
@@ -39,44 +47,38 @@
             $(nRow).find('td:eq(4)').html(htmlTmp);
         }
     };
-    $("#belongs_business").click(function(e) {
-        $("#businessId").val([]).trigger('change');
+    $("#belongs_profile").click(function(e) {
+        $("#profileId").val([]).trigger('change');
         if ($(this).is(":checked")) {
-            $("#div-business").css("display", "block");
+            $("#div-profile").css("display", "block");
         } else {
-            $("#div-business").css("display", "none");
+            $("#div-profile").css("display", "none");
         }
     });
     $("#mdlStore").on("hide.bs.modal", function(event) {
-        $("#belongs_business").prop("checked", false);
-        $("#businessId").val([]).trigger("change");
-        $("#div-business").css("display", "none");
+        $("#belongs_profile").prop("checked", false);
+        $("#profileId").val([]).trigger("change");
+        $("#div-profile").css("display", "none");
     });
 </script>
 @endpush
 @section("content_form_modal")
     <div class="form-group">
-        <label><input type="checkbox" id="belongs_business"><span>Pertenece a un Perfil</span></label>
+        <label><input type="checkbox" id="belongs_profile"><span>Pertenece a un Perfil</span></label>
     </div>
-    <div class="form-group" id="div-business" style="display: none;">
-        <label>Perfil</label>
-        <select name="business_id" class="form-control select2" data-placeholder="Seleccione una Empresa" id="businessId" style="width: 100%;">
-            <option value="">Seleccione</option>
-            
-        </select>
-    </div>
+   
     <div class="form-group">
         <label>Nombre Perfil *</label>
-        <input type="text" name="nombre" class="form-control" />
+        <input type="text" name="name" class="form-control" />
     </div>
     <div class="form-group">
         <label>Descripcion *</label>
         <input type="text" name="descripcion" class="form-control" required />
     </div>
-     
+          
     <div class="form-group">
         <label>Estado *</label>
-        <select class="form-control select2" name="estado" data-placeholder="Seleccione un Estado" style="width: 100%;">
+        <select class="form-control select2" name="status" data-placeholder="Seleccione un Estado" style="width: 100%;">
             <option value="">Seleccione</option>
             <option value="1">Activo</option>
             <option value="0">Inactivo</option>
