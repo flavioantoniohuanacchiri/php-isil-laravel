@@ -26,7 +26,13 @@ Route::get('/test', function () {
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+
 Route::get("/user", "UserController@index");
 Route::post("/user/store", "UserController@store");
 Route::get("/user/show", "UserController@show");
 Route::post("/user/destroy", "UserController@destroy");
+
+Route::get("/profile", "ProfileController@index");
+Route::post("/profile/store", "ProfileController@store");
+Route::get("/profile/show", "ProfileController@show");
+Route::post("/profile/destroy", "ProfileController@destroy");
