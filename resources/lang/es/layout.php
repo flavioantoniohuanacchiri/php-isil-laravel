@@ -4,6 +4,7 @@ return [
 	"sidebar" => [
 		"master" => "Mantenimientos",
 		"user" => "Usuarios",
-		"profile" => "Perfiles"
+		"profile" => "Perfiles",
+		"module" => "Modulos"
 	]
 ];
