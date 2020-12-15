@@ -18,6 +18,33 @@
         </div>
         <!-- Sidebar Menu -->
         <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link active">
+                        <i class="nav-icon fas fa-circle"></i>
+                            <p>{{trans("layout.sidebar.master")}}
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                            <ul class="nav nav-treeview" >
+                                <li class="nav-item has-treeview">
+                                    <a href="/user" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>{{trans("layout.sidebar.user")}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="/profile" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>{{trans("layout.sidebar.profile")}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
+                    </a>
+            </ul>
             @php
                 $pathUrl = \Request::path();
                 if ($pathUrl != "/") {

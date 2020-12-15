@@ -36,3 +36,4 @@ Route::get("/profile", "ProfileController@index");
 Route::post("/profile/store", "ProfileController@store");
 Route::get("/profile/show", "ProfileController@show");
 Route::post("/profile/destroy", "ProfileController@destroy");
+

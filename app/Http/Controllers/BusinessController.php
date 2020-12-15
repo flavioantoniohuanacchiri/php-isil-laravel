@@ -6,38 +6,26 @@ use App\Helpers\ViewHelper;
 use App\User;
 use App\Profile;
 use App\Business;
-use App\Events\UserCreated;
 use DB;
 
-class UserController extends Controller
+class BusinessController extends Controller
 {
 	public function index(Request $request)
 	{
 		$site = [
-			"name" => "Usuarios",
-			"url_controller" => "user",
-			"url" => "user",
-			"profile" => Profile::where("status", 1)->get()->toArray(),
-			"business" => Business::where("status", 1)->get()->toArray()
+			"name" => "Empresas",
+			"url_controller" => "business",
+			"url" => "business",
 		];
 		if ($request->ajax()) {
 			return datatables()->of(
-	            User::with([
-	            	"profile" => function($q) {
-	            		$q->select("id", "name");
-	            		//$q->where("status", 0);
-	            	},
-	            	"business" => function($q) {
-	            		$q->select("id", "name", "number_identifer");
-	            		//$q->where("number_identifer", "like", "%35%");
-	            	}
-	        	])->get()
+	            Business::get()
 	        )->addColumn('action', function ($data){
                 //return DataTableHelper::buttonsActionsByPerfil(\Auth::user()->profile, $url, $data);
                 return ViewHelper::allButtons($data);
             })->toJson();
 		}
-		return view("user", compact("site"));
+		return view("business", compact("site"));
 		
 	}
 	public function store(Request $request)
@@ -75,9 +63,6 @@ class UserController extends Controller
 			}
 			$obj->save();
 			DB::commit();
-			if (is_null($userId)) {
-				event(new UserCreated($obj));
-			}
 			return response(["rst" => 1, "obj" => $obj, "msj" => "Usuario Creado"]);
 		} catch (Exception $e) {
 			DB::rollback();
@@ -86,10 +71,22 @@ class UserController extends Controller
 	}
 	public function show(Request $request)
 	{
-		$business = $obj->business;
-
+		$keyCache = "showBusiness";
 		if (!is_null($request->masterId)) {
-			return response(["rst" => 1, "obj" => User::with(["business", "businessTwo"])->find($request->masterId)]);
+			$keyCache.="_".$request->masterId;
+			$masterId = $request->masterId;
+			$obj = \Cache::get($keyCache);
+			if (!$obj) {
+				$obj = \Cache::remember(
+					$keyCache,
+					1*60*60,
+					function() use ($masterId) {
+						return Business::find($masterId);
+					}
+				);
+			}
+			return response(["rst" => 1, "obj" => $obj]);
+			//return response(["rst" => 1, "obj" => User::with("business", "businessTwo")->find($request->masterId)]);
 		}
 		return response(["rst" => 2, "obj" => [], "msj" => ""]);
 	}
