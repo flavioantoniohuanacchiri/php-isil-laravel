@@ -72,6 +72,7 @@
             
         </select>
     </div>
+    
     <div class="form-group">
         <label>Nombres *</label>
         <input type="text" name="full_name" class="form-control" />

@@ -38,12 +38,12 @@ class ProfileController extends Controller
 				$obj = new Profile;
 			}
 			else{
-				$objTmp = Profile::where("profile_id", $request->profile_id)->where("id", "<>", $profileId)->first();
+				$objTmp = Profile::where("profile_id", $request->profile_id)->where("profile_id", "<>", $profileId)->first();
 				$obj = Profile::find($profileId);
 			}
 		
 			
-			//$obj->profile_id = $request->profile_id;
+			$obj->profile_id = $request->profile_id;
 			$obj->name = $request->name;
 			$obj->descripcion = $request->descripcion;
 			$obj->status = $request->status;

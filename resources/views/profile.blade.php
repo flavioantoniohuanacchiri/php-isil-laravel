@@ -11,7 +11,7 @@
 @endsection
 @section('columns_head')
 <tr>
-    <th>Perfil ID</th>
+    <!--th>Perfil ID</th-->
     <th>Perfil</th>
     <th>Descripción</th>
     <th>Estado</th>
@@ -24,7 +24,7 @@
 @section("script_master")
 <script type="text/javascript">
     columnsTable = [
-    	{"data": "profile_id"},
+    	//{"data": "profile_id"},
         {"data": "name"},
         {"data": "descripcion"},
         {"data": "status"},
@@ -61,10 +61,7 @@
 </script>
 @endpush
 @section("content_form_modal")
-    <div class="form-group">
-        <label><input type="checkbox" id="belongs_profile"><span>Pertenece a un Perfil</span></label>
-    </div>
-   
+
     <div class="form-group">
         <label>Nombre Perfil *</label>
         <input type="text" name="name" class="form-control" />
