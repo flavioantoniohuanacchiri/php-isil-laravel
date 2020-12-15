@@ -27,15 +27,20 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::resource("/user", "UserController");
-Route::resource("/profile", "ProfileController");
-Route::resource("/business", "BusinessController");
-
 Route::get("/user", "UserController@index");
 Route::post("/user/store", "UserController@store");
 Route::get("/user/show", "UserController@show");
 
+
 Route::get("/profile", "ProfileController@index");
 Route::post("/profile/store", "ProfileController@store");
 Route::get("/profile/show", "ProfileController@show");
+
+Route::post("/user/destroy", "UserController@destroy");
+
+Route::get("/business", "BusinessController@index");
+Route::post("/business/store", "BusinessController@store");
+Route::get("/business/show", "BusinessController@show");
+Route::post("/business/destroy", "BusinessController@destroy");
+
 

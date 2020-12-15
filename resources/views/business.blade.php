@@ -11,12 +11,15 @@
 @endsection
 @section('columns_head')
 <tr>
-    <th>Nombres</th>
-    <th>Apellidos</th>
-    <th>Usuario</th>
-    <th>Email</th>
-    <th>Estado</th>
-    <th>Intentos</th>
+
+    <th>Razón Social</th>
+    <!--<th>Apellidos</th>
+    <th>Usuario</th>-->
+    <th>RUC</th>
+    <th>Dirección</th>
+    <!--<th>Estado</th>
+    <th>Intentos</th>-->
+
     <th>Actualizado</th>
     <th class="column-options">[]</th>
 </tr>
@@ -24,17 +27,21 @@
 @section("script_master")
 <script type="text/javascript">
     columnsTable = [
-        {"data": "full_name"},
+
+    	{"data": "name"},
+        /*{"data": "full_name"},
         {"data": "last_name"},
-        {"data": "user_name"},
-        {"data": "email"},
+        {"data": "user_name"},*/
+        {"data": "number_identifer"},
+        {"data": "address"},
         {"data": "status"},
-        {"data": "num_intentos"},
+        /*{"data": "num_intentos"},*/
         {"data" : "updated_at"},
         {"data": 'action', name: 'action', orderable: false, searchable: false}
     ];
-    confirmDelete["titleMessage"] = "Eliminación de Usuario";
-    confirmDelete["textMessage"] = "¿Desea Eliminar este Usuario?";
+    confirmDelete["titleMessage"] = "Eliminación de Empresa";
+    confirmDelete["textMessage"] = "¿Desea Eliminar este Empresa?";
+
 </script>
 @endsection
 @push("js_master")
@@ -64,39 +71,19 @@
     <div class="form-group">
         <label><input type="checkbox" id="belongs_business"><span>Pertenece a una Empresa</span></label>
     </div>
-    <div class="form-group" id="div-business" style="display: none;">
-        <label>Empresa</label>
-        <select name="business_id" class="form-control select2" data-placeholder="Seleccione una Empresa" id="businessId" style="width: 100%;">
-            <option value="">Seleccione</option>
-            
-        </select>
+
+    <div class="form-group">
+        <label>Razón Social *</label>
+        <input type="text" name="name" class="form-control" />
     </div>
     <div class="form-group">
-        <label>Nombres *</label>
-        <input type="text" name="full_name" class="form-control" />
+        <label>RUC *</label>
+        <input type="text" name="number_identifer" class="form-control" required />
     </div>
     <div class="form-group">
-        <label>Apellidos *</label>
-        <input type="text" name="last_name" class="form-control" required />
-    </div>
-    <div class="form-group">
-        <label>Email *</label>
-        <input type="text" name="email" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Nombre de Usuario *</label>
-        <input type="text" name="user_name" class="form-control" required />
-    </div>
-    <div class="form-group">
-        <label>DNI *</label>
-        <input type="text" name="document_number" class="form-control solo-enteros" required />
-    </div>
-    <div class="form-group">
-        <label>Perfiles</label>
-        <select name="profile_id" class="form-control select2" data-placeholder="Seleccione un Perfil" style="width: 100%;">
-            <option value="">Seleccione</option>
-            
-        </select>
+        <label>Dirección *</label>
+        <input type="text" name="address" class="form-control" />
+
     </div>
     <div class="form-group">
         <label>Contraseña *</label>

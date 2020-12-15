@@ -1,8 +1,11 @@
 <?php namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Profile extends Model
+class Profile extends BaseModel
 {
 	protected $table = "profile";
+
+	public function modules()
+	{
+		return $this->hasMany("App\ProfileModule", "profile_id", "id");
+	}
 }
