@@ -21,7 +21,14 @@ class UserController extends Controller
 		];
 		if ($request->ajax()) {
 			return datatables()->of(
-	            User::get()
+	            User::with(["profile" => function($q){
+	            	$q->select("id","name");
+	            },
+	            "business" => function($q) {
+	            	$q->select("id","name", "number_identifer");
+	            	//$q->where("number_identifer","like","%35%");
+	            }
+	        ])->get()
 	        )->addColumn('action', function ($data){
                 //return DataTableHelper::buttonsActionsByPerfil(\Auth::user()->profile, $url, $data);
                 return ViewHelper::allButtons($data);
@@ -76,8 +83,10 @@ class UserController extends Controller
 	}
 	public function show(Request $request)
 	{
+		$business = $obj->business;
+
 		if (!is_null($request->masterId)) {
-			return response(["rst" => 1, "obj" => User::find($request->masterId)]);
+			return response(["rst" => 1, "obj" => User::with(["business", "businessTwo"])->find($request->masterId)]);
 		}
 		return response(["rst" => 2, "obj" => [], "msj" => ""]);
 	}

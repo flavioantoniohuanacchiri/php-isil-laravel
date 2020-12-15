@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Helpers\ViewHelper;
 use App\Profile;
+use App\Module;
 use DB;
 
 class ProfileController extends Controller
@@ -13,11 +14,15 @@ class ProfileController extends Controller
 		$site = [
 			"name" => "Perfiles",
 			"url_controller" => "profile",
-			"url" => "profile"
+			"url" => "profile",
+			"module" => Module::where("status", 1)->get()->toArray(),
 		];
 		if ($request->ajax()) {
 			return datatables()->of(
-	            Profile::get()
+	            Profile::with(["module" => function($q){
+	            	$q->select("id","name");
+	            }
+	        ])->get()
 	        )->addColumn('action', function ($data){
                 //return DataTableHelper::buttonsActionsByPerfil(\Auth::user()->profile, $url, $data);
                 return ViewHelper::allButtons($data);
@@ -49,7 +54,7 @@ class ProfileController extends Controller
 				$obj = Profile::find($profileId);
 			}
 			$obj->name = $request->name;
-			$obj->code = $request->code;
+			$obj->module_id = $request->module_id;
 			$obj->status = $request->status;
 
 			$obj->save();

@@ -5,7 +5,9 @@ return [
 		"master" => "Mantenimiento",
 		"user" => "Usuarios",
 		"profile" => "Perfiles",
-		"business" => "Empresas"
+		"business" => "Empresas",
+		"module" => "Modulos"
+
 	]
 ];
 

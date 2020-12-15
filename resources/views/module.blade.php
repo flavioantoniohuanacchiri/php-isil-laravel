@@ -12,8 +12,8 @@
 @section('columns_head')
 <tr>
     <th>Nombre</th>
-    <th>Modulo</th>
-    <!--<th>Estado</th>-->
+    <th>Modulo Padre</th>
+    <th>Estado</th>
     <th>Actualizado</th>
     <th class="column-options">[]</th>
 </tr>
@@ -22,14 +22,8 @@
 <script type="text/javascript">
     columnsTable = [
     	{"data": "name"},
-        {"data": function (row, type, val, meta){
-            let module = "";
-            if (row.module!=null && row.module !="null"){
-                return row.module.name;
-            }
-            return "";
-        },name: "module_id"},
-        //{"data": "status"},
+        {"data": "class_icon"},
+        {"data": "status"},
         {"data" : "updated_at"},
         {"data": 'action', name: 'action', orderable: false, searchable: false}
     ];
@@ -39,12 +33,12 @@
 @endsection
 @push("js_master")
 <script type="text/javascript">
-    functionRowTable = function(nRow, aData) {
+    /*functionRowTable = function(nRow, aData) {
         if (aData!=null && aData!="null" && aData["status"] !=null && aData["status"] !="null") {
             let htmlTmp = Master.htmlStatus(aData['status']);
             $(nRow).find('td:eq(4)').html(htmlTmp);
         }
-    };
+    };*/
     $("#belongs_business").click(function(e) {
         $("#businessId").val([]).trigger('change');
         if ($(this).is(":checked")) {
@@ -66,15 +60,8 @@
         <input type="text" name="name" class="form-control" />
     </div>
     <div class="form-group">
-        <label>Modulo</label>
-        <select name="module_id" class="form-control select2" data-placeholder="Seleccione un Modulo" style="width: 100%;">
-            <option value="">Seleccione</option>
-            @if(isset($site["module"]))
-                @foreach($site["module"] as $key => $value)
-                <option value="{{$value['id']}}">{{$value['name']}}</option>
-                @endforeach
-            @endif
-        </select>
+        <label>Modulo Padre *</label>
+        <input type="text" name="class_icon" class="form-control" required />
     </div>
     <div class="form-group">
         <label>Estado *</label>

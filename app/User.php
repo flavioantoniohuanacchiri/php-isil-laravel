@@ -49,4 +49,19 @@ class User extends Authenticatable
     {
         return $date->format("Y-m-d h:i:s a");
     }
+
+    public function business()
+    {
+        return $this->belongsTo("App\Business");
+    }
+
+    public function businessTwo()
+    {
+        return $this->hasOne("App\Business", "id", "business_id");
+    }
+
+    public function profile()
+    {
+        return $this->belongsTo("App\Profile");
+    }
 }

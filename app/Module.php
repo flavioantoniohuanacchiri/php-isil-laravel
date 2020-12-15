@@ -3,11 +3,11 @@
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Profile extends BaseModel
+class Module extends BaseModel
 {
 	use SoftDeletes;
 	
-	protected $table = "profile";
+	protected $table = "module";
 
 	protected function serializeDate(\DateTimeInterface $date)
     {
@@ -22,12 +22,4 @@ class Profile extends BaseModel
      */
     protected $dates = ['deleted_at'];
 
-    /*public function modules()
-    {
-        return $this->hasMany("App\ProfileModule", "profile_id", "id");
-    }*/
-    public function module()
-    {
-        return $this->belongsTo("App\Module");
-    }
 }

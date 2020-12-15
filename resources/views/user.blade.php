@@ -15,8 +15,9 @@
     <!--<th>Apellidos</th>
     <th>Usuario</th>-->
     <th>Email</th>
-    <!--<th>Estado</th>
-    <th>Intentos</th>-->
+    <th>Perfil</th>
+    <th>Empresa</th>
+    <!--<th>Intentos</th>-->
     <th>Actualizado</th>
     <th class="column-options">[]</th>
 </tr>
@@ -26,6 +27,20 @@
     columnsTable = [
     	{"data": "name"},
         {"data": "email"},
+        {"data": function (row, type, val, meta){
+            let profile = "";
+            if (row.profile!=null && row.profile !="null"){
+                return row.profile.name;
+            }
+            return "";
+        },name: "profile_id"},
+        {"data": function ( row, type, val, meta ) {
+            let business = "";
+            if (row.business!=null && row.business !="null") {
+                return row.business.name;
+            }
+            return "";
+        }, name: 'business_id'},
         {"data" : "updated_at"},
         {"data": 'action', name: 'action', orderable: false, searchable: false}
     ];
@@ -35,12 +50,12 @@
 @endsection
 @push("js_master")
 <script type="text/javascript">
-    functionRowTable = function(nRow, aData) {
+    /*functionRowTable = function(nRow, aData) {
         if (aData!=null && aData!="null" && aData["status"] !=null && aData["status"] !="null") {
             let htmlTmp = Master.htmlStatus(aData['status']);
             $(nRow).find('td:eq(4)').html(htmlTmp);
         }
-    };
+    };*/
     $("#belongs_business").click(function(e) {
         $("#businessId").val([]).trigger('change');
         if ($(this).is(":checked")) {
