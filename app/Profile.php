@@ -1,13 +1,16 @@
 <?php namespace App;
 
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Profile extends BaseModel
 {
 	use SoftDeletes;
 	
 	protected $table = "profile";
+
 
 	protected function serializeDate(\DateTimeInterface $date)
     {
@@ -31,3 +34,5 @@ class Profile extends BaseModel
         return $this->belongsTo("App\Module");
     }
 }
+
+

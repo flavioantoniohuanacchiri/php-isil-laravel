@@ -16,6 +16,15 @@
     <th>Dirección</th>
     <th>Ubigeo</th>
     <th>Estado</th>
+=======
+    <th>Razón Social</th>
+    <!--<th>Apellidos</th>
+    <th>Usuario</th>-->
+    <th>RUC</th>
+    <th>Dirección</th>
+    <!--<th>Estado</th>
+    <th>Intentos</th>-->
+>>>>>>> master
     <th>Actualizado</th>
     <th class="column-options">[]</th>
 </tr>
@@ -23,6 +32,7 @@
 @section("script_master")
 <script type="text/javascript">
     columnsTable = [
+
     	{"data": "number_identifer"},
         {"data": "name"},
         {"data": "address"},
@@ -33,6 +43,7 @@
     ];
     confirmDelete["titleMessage"] = "Eliminación de Empresas";
     confirmDelete["textMessage"] = "¿Desea Eliminar esta Empresa?";
+
 </script>
 @endsection
 @push("js_master")
@@ -60,12 +71,15 @@
 @endpush
 @section("content_form_modal")
     <div class="form-group">
-        <label>RUC *</label>
-        <input type="text" name="number_identifer" class="form-control" />
+     <label><input type="checkbox" id="belongs_business"><span>Pertenece a una Empresa</span></label>
     </div>
     <div class="form-group">
         <label>Razón Social *</label>
         <input type="text" name="name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>RUC *</label>
+        <input type="text" name="number_identifer" class="form-control" required />
     </div>
     <div class="form-group">
         <label>Dirección *</label>
@@ -74,5 +88,13 @@
     <div class="form-group">
         <label>Ubigeo *</label>
         <input type="text" name="ubigeo" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Estado *</label>
+        <select class="form-control select2" name="status" data-placeholder="Seleccione un Estado" style="width: 100%;">
+            <option value="">Seleccione</option>
+            <option value="1">Activo</option>
+            <option value="0">Inactivo</option>
+        </select>
     </div>
 @endsection

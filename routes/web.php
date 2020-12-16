@@ -51,3 +51,4 @@ Route::get("/module", "ModuleController@index");
 Route::post("/module/store", "ModuleController@store");
 Route::get("/module/show", "ModuleController@show");
 Route::post("/module/destroy", "ModuleController@destroy");
+

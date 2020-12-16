@@ -18,6 +18,8 @@
     <th>Perfil</th>
     <th>Empresa</th>
     <!--<th>Intentos</th>-->
+    <!--<th>Estado</th>
+    <th>Intentos</th>-->
     <th>Actualizado</th>
     <th class="column-options">[]</th>
 </tr>
@@ -34,6 +36,14 @@
             }
             return "";
         },name: "profile_id"},
+        //{"data": "profile_id"},
+        {"data": function ( row, type, val, meta ) {
+            let profile = "";
+            if (row.profile!=null && row.profile !="null") {
+                return row.profile.name;
+            }
+            return "";
+        }, name: 'profile_id'},
         {"data": function ( row, type, val, meta ) {
             let business = "";
             if (row.business!=null && row.business !="null") {
@@ -41,6 +51,8 @@
             }
             return "";
         }, name: 'business_id'},
+        /*{"data": "status"},
+        {"data": "num_intentos"},*/
         {"data" : "updated_at"},
         {"data": 'action', name: 'action', orderable: false, searchable: false}
     ];

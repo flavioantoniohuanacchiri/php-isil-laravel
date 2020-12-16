@@ -3,6 +3,9 @@
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Helpers\ViewHelper;
+
+use App\User;
+use App\Profile;
 use App\Business;
 use DB;
 
@@ -28,6 +31,7 @@ class BusinessController extends Controller
 	}
 	public function store(Request $request)
 	{
+
 		$businessId = $request->has("masterId")? $request->masterId : null;
 		if ($request->number_identifer == "") {
 			return response(["rst" => 2, "obj" => [], "msj" => "Necesita Ingresar un RUC"]);
@@ -35,6 +39,7 @@ class BusinessController extends Controller
 		DB::beginTransaction();
 		try {
 			$obj = null;
+
 			if (is_null($businessId)) {
 				$objTmp = Business::where("number_identifer", $request->number_identifer)->first();
 				if (!is_null($objTmp)) {
@@ -60,7 +65,9 @@ class BusinessController extends Controller
 			DB::rollback();
 			return response(["rst" => 2, "obj" => [], "msj" => $e->getMessage()]);
 		}
-		print_r($request->all()); dd();
+
+		//print_r($request->all()); dd();
+
 	}
 	public function show(Request $request)
 	{
@@ -90,10 +97,12 @@ class BusinessController extends Controller
 	public function destroy(Request $request)
 	{
 		$masterId = $request->has("masterId")? $request->masterId : null;
+
 		$obj = Business::find($masterId);
 		if (!is_null($obj)) {
 			$obj->delete();
 			return response(["rst" => 1, "msj" => "Empresa Eliminada Correctamente"]);
+
 		}
 		return response(["rst" => 2, "msj" => "Hubo un Error"]);
 	}
