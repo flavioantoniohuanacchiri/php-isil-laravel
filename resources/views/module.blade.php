@@ -7,7 +7,7 @@
 </style>
 @endpush
 @section('title_list')
-	Listado de Perfiles
+	Listado de Módulos
 @endsection
 @section('columns_head')
 <tr>
@@ -33,12 +33,12 @@
 @endsection
 @push("js_master")
 <script type="text/javascript">
-    /*functionRowTable = function(nRow, aData) {
+    functionRowTable = function(nRow, aData) {
         if (aData!=null && aData!="null" && aData["status"] !=null && aData["status"] !="null") {
             let htmlTmp = Master.htmlStatus(aData['status']);
-            $(nRow).find('td:eq(4)').html(htmlTmp);
+            $(nRow).find('td:eq(2)').html(htmlTmp);
         }
-    };*/
+    };
     $("#belongs_business").click(function(e) {
         $("#businessId").val([]).trigger('change');
         if ($(this).is(":checked")) {

@@ -13,7 +13,7 @@
 <tr>
     <th>Nombre</th>
     <th>Modulo</th>
-    <!--<th>Estado</th>-->
+    <th>Estado</th>
     <th>Actualizado</th>
     <th class="column-options">[]</th>
 </tr>
@@ -29,7 +29,7 @@
             }
             return "";
         },name: "module_id"},
-        //{"data": "status"},
+        {"data": "status"},
         {"data" : "updated_at"},
         {"data": 'action', name: 'action', orderable: false, searchable: false}
     ];
@@ -42,7 +42,7 @@
     functionRowTable = function(nRow, aData) {
         if (aData!=null && aData!="null" && aData["status"] !=null && aData["status"] !="null") {
             let htmlTmp = Master.htmlStatus(aData['status']);
-            $(nRow).find('td:eq(4)').html(htmlTmp);
+            $(nRow).find('td:eq(2)').html(htmlTmp);
         }
     };
     $("#belongs_business").click(function(e) {

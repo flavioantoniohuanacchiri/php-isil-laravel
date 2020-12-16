@@ -16,15 +16,6 @@
     <th>Dirección</th>
     <th>Ubigeo</th>
     <th>Estado</th>
-=======
-    <th>Razón Social</th>
-    <!--<th>Apellidos</th>
-    <th>Usuario</th>-->
-    <th>RUC</th>
-    <th>Dirección</th>
-    <!--<th>Estado</th>
-    <th>Intentos</th>-->
->>>>>>> master
     <th>Actualizado</th>
     <th class="column-options">[]</th>
 </tr>

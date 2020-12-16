@@ -18,8 +18,7 @@
     <th>Perfil</th>
     <th>Empresa</th>
     <!--<th>Intentos</th>-->
-    <!--<th>Estado</th>
-    <th>Intentos</th>-->
+    <th>Estado</th>
     <th>Actualizado</th>
     <th class="column-options">[]</th>
 </tr>
@@ -62,12 +61,12 @@
 @endsection
 @push("js_master")
 <script type="text/javascript">
-    /*functionRowTable = function(nRow, aData) {
+    functionRowTable = function(nRow, aData) {
         if (aData!=null && aData!="null" && aData["status"] !=null && aData["status"] !="null") {
             let htmlTmp = Master.htmlStatus(aData['status']);
             $(nRow).find('td:eq(4)').html(htmlTmp);
         }
-    };*/
+    };
     $("#belongs_business").click(function(e) {
         $("#businessId").val([]).trigger('change');
         if ($(this).is(":checked")) {
