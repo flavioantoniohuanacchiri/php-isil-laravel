@@ -15,6 +15,8 @@
     <!--<th>Apellidos</th>
     <th>Usuario</th>-->
     <th>Email</th>
+    <th>Perfil</th>
+    <th>Empresa</th>
     <!--<th>Estado</th>
     <th>Intentos</th>-->
     <th>Actualizado</th>
@@ -29,6 +31,21 @@
         {"data": "last_name"},
         {"data": "user_name"},*/
         {"data": "email"},
+        //{"data": "profile_id"},
+        {"data": function ( row, type, val, meta ) {
+            let profile = "";
+            if (row.profile!=null && row.profile !="null") {
+                return row.profile.name;
+            }
+            return "";
+        }, name: 'profile_id'},
+        {"data": function ( row, type, val, meta ) {
+            let business = "";
+            if (row.business!=null && row.business !="null") {
+                return row.business.name;
+            }
+            return "";
+        }, name: 'business_id'},
         /*{"data": "status"},
         {"data": "num_intentos"},*/
         {"data" : "updated_at"},
