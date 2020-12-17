@@ -86,8 +86,6 @@ class UserController extends Controller
 	}
 	public function show(Request $request)
 	{
-		$business = $obj->business;
-
 		if (!is_null($request->masterId)) {
 			return response(["rst" => 1, "obj" => User::with(["business", "businessTwo"])->find($request->masterId)]);
 		}
