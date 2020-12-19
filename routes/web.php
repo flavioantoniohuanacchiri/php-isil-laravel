@@ -26,29 +26,36 @@ Route::get('/test', function () {
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
-
-
-Route::resource("/user", "UserController");
 Route::get("/user", "UserController@index");
 Route::post("/user/store", "UserController@store");
 Route::get("/user/show", "UserController@show");
 Route::post("/user/destroy", "UserController@destroy");
 
-Route::resource("/business", "BusinessController");
 Route::get("/business", "BusinessController@index");
 Route::post("/business/store", "BusinessController@store");
 Route::get("/business/show", "BusinessController@show");
 Route::post("/business/destroy", "BusinessController@destroy");
 
-Route::resource("/profile", "ProfileController");
-Route::get("/profile", "ProfileController@index");
-Route::post("/profile/store", "ProfileController@store");
-Route::get("/profile/show", "ProfileController@show");
-Route::post("/profile/destroy", "ProfileController@destroy");
+Route::get("/categoria", "CategoriaController@index");
+Route::post("/categoria/store", "CategoriaController@store");
+Route::get("/categoria/show", "CategoriaController@show");
+Route::post("/categoria/destroy", "CategoriaController@destroy");
 
-Route::resource("/module", "ModuleController");
-Route::get("/module", "ModuleController@index");
-Route::post("/module/store", "ModuleController@store");
-Route::get("/module/show", "ModuleController@show");
-Route::post("/module/destroy", "ModuleController@destroy");
+Route::get("/atributotipo", "AtributoTipoController@index");
+Route::post("/atributotipo/store", "AtributoTipoController@store");
+Route::get("/atributotipo/show", "AtributoTipoController@show");
+Route::post("/atributotipo/destroy", "AtributoTipoController@destroy");
 
+Route::get("/atributo", "AtributoController@index");
+Route::post("/atributo/store", "AtributoController@store");
+Route::get("/atributo/show", "AtributoController@show");
+Route::post("/atributo/destroy", "AtributoController@destroy");
+
+
+Route::get("/producto", "ProductoController@index");
+Route::post("/producto/store", "ProductoController@store");
+Route::get("/producto/show", "ProductoController@show");
+Route::post("/producto/destroy", "ProductoController@destroy");
+
+Route::resource('venta', 'VentaController');
+Route::delete('venta/destroy', 'VentaController@massDestroy')->name('venta.massDestroy');

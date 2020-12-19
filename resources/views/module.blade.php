@@ -12,7 +12,7 @@
 @section('columns_head')
 <tr>
     <th>Nombre</th>
-    <th>Modulo Padre</th>
+    <!--<th>Modulo Padre</th>-->
     <th>Estado</th>
     <th>Actualizado</th>
     <th class="column-options">[]</th>
@@ -22,7 +22,7 @@
 <script type="text/javascript">
     columnsTable = [
     	{"data": "name"},
-        {"data": "class_icon"},
+        //{"data": "class_icon"},
         {"data": "status"},
         {"data" : "updated_at"},
         {"data": 'action', name: 'action', orderable: false, searchable: false}
@@ -36,7 +36,7 @@
     functionRowTable = function(nRow, aData) {
         if (aData!=null && aData!="null" && aData["status"] !=null && aData["status"] !="null") {
             let htmlTmp = Master.htmlStatus(aData['status']);
-            $(nRow).find('td:eq(2)').html(htmlTmp);
+            $(nRow).find('td:eq(1)').html(htmlTmp);
         }
     };
     $("#belongs_business").click(function(e) {
@@ -59,10 +59,10 @@
         <label>Nombre *</label>
         <input type="text" name="name" class="form-control" />
     </div>
-    <div class="form-group">
+    <!--<div class="form-group">
         <label>Modulo Padre *</label>
         <input type="text" name="class_icon" class="form-control" required />
-    </div>
+    </div>-->
     <div class="form-group">
         <label>Estado *</label>
         <select class="form-control select2" name="status" data-placeholder="Seleccione un Estado" style="width: 100%;">

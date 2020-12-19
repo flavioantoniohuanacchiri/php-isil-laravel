@@ -1,14 +1,15 @@
-<?php 
+<?php
 
 return [
 	"sidebar" => [
-		"master" => "Mantenimiento",
+		"master" => "Mantenimientos",
 		"user" => "Usuarios",
 		"profile" => "Perfiles",
-		"business" => "Empresas",
-		"module" => "Modulos"
+		"producto" => "Productos",
+		"categoria" => "Categorías",
+		"atributo" => "Atributos",
+		"atributotipo" => "Tipos de Atributos",
+		"venta" => "Ventas",
 
 	]
 ];
-
- ?>

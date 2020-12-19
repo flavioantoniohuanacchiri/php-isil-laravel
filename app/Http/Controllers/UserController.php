@@ -7,7 +7,7 @@ use App\User;
 use App\Profile;
 use App\Business;
 
-use App\Events\UserCreated;
+//use App\Events\UserCreated;
 
 use DB;
 
@@ -89,9 +89,9 @@ class UserController extends Controller
 			}
 			$obj->save();
 			DB::commit();
-			if (is_null($userId)) {
+			/*if (is_null($userId)) {
 				event(new UserCreated($obj));
-			}
+			}*/
 			return response(["rst" => 1, "obj" => $obj, "msj" => "Usuario Creado"]);
 		} catch (Exception $e) {
 			DB::rollback();
@@ -100,7 +100,7 @@ class UserController extends Controller
 	}
 	public function show(Request $request)
 	{
-		$business = $obj->business;
+		//$business = $obj->business;
 
 		if (!is_null($request->masterId)) {
 			return response(["rst" => 1, "obj" => User::with(["business", "businessTwo"])->find($request->masterId)]);
