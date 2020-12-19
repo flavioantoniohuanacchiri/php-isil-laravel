@@ -112,11 +112,11 @@
     </div>
     <div class="form-group">
         <label>Perfiles</label>
-        <select name="profile_id" class="form-control select2" data-placeholder="Seleccione un Perfil" style="width: 100%;">
+        <select name="id" class="form-control select2" data-placeholder="Seleccione un Perfil" style="width: 100%;">
             <option value="">Seleccione</option>
             @if(isset($site["profile"]))
             	@foreach($site["profile"] as $key => $value)
-            	<option value="{{$value['profile_id']}}">{{$value['name']}}</option>
+            	<option value="{{$value['id']}}">{{$value['name']}}</option>
             	@endforeach
             @endif
         </select>

@@ -2,28 +2,16 @@
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-<<<<<<< HEAD
-use App\Business;
-=======
 use App\Helpers\ViewHelper;
 use App\User;
 use App\Profile;
 use App\Business;
 use DB;
->>>>>>> 82e69a7a881dc7ad357b70d5b61cee69dbfe4b35
 
 class BusinessController extends Controller
 {
 	public function index(Request $request)
 	{
-<<<<<<< HEAD
-		if ($request->ajax()) {
-			return datatables()->of(
-	            Business::get()
-	        )->toJson();
-		}
-		return view("business");
-=======
 		$site = [
 			"name" => "Empresas",
 			"url_controller" => "business",
@@ -38,18 +26,10 @@ class BusinessController extends Controller
             })->toJson();
 		}
 		return view("business", compact("site"));
->>>>>>> 82e69a7a881dc7ad357b70d5b61cee69dbfe4b35
 		
 	}
 	public function store(Request $request)
 	{
-<<<<<<< HEAD
-		
-	}
-	public function show(Request $request)
-	{
-		
-=======
 		$userId = $request->has("masterId")? $request->masterId : null;
 		if ($request->document_number == "") {
 			return response(["rst" => 2, "obj" => [], "msj" => "Necesita Ingresar un Documento"]);
@@ -109,7 +89,6 @@ class BusinessController extends Controller
 			//return response(["rst" => 1, "obj" => User::with("business", "businessTwo")->find($request->masterId)]);
 		}
 		return response(["rst" => 2, "obj" => [], "msj" => ""]);
->>>>>>> 82e69a7a881dc7ad357b70d5b61cee69dbfe4b35
 	}
 	public function update(Request $request)
 	{
@@ -117,9 +96,6 @@ class BusinessController extends Controller
 	}
 	public function destroy(Request $request)
 	{
-<<<<<<< HEAD
-		
-=======
 		$masterId = $request->has("masterId")? $request->masterId : null;
 		$obj = User::find($masterId);
 		if (!is_null($obj)) {
@@ -127,6 +103,5 @@ class BusinessController extends Controller
 			return response(["rst" => 1, "msj" => "Usuario Eliminado Correctamente"]);
 		}
 		return response(["rst" => 2, "msj" => "Hubo un Error"]);
->>>>>>> 82e69a7a881dc7ad357b70d5b61cee69dbfe4b35
 	}
 }
