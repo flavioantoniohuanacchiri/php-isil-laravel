@@ -42,6 +42,46 @@
                                         </p>
                                     </a>
                                 </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="/venta" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>{{trans("layout.sidebar.venta")}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="/producto" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>{{trans("layout.sidebar.producto")}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="/categoria" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>{{trans("layout.sidebar.categoria")}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="/atributo" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>{{trans("layout.sidebar.atributo")}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="/atributotipo" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>{{trans("layout.sidebar.atributotipo")}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                </li>
                             </ul>
                     </a>
             </ul>

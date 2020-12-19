@@ -30,6 +30,8 @@
             text-align: center;
         }
     </style>
+
+    
 @endpush
 @section('content')
 <!-- Main content -->

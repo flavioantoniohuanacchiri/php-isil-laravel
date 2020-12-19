@@ -4,6 +4,12 @@ return [
 	"sidebar" => [
 		"master" => "Mantenimientos",
 		"user" => "Usuarios",
-		"profile" => "Perfiles"
+		"profile" => "Perfiles",
+		"producto" => "Productos",
+		"categoria" => "Categorías",
+		"atributo" => "Atributos",
+		"atributotipo" => "Tipos de Atributos",
+		"venta" => "Ventas",
+
 	]
 ];
