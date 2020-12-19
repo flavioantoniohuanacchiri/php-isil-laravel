@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use App\Helpers\ViewHelper;
 use App\User;
 use App\Profile;
+use App\Business;
+use App\Events\UserCreated;
 use DB;
 
 class UserController extends Controller
@@ -15,11 +17,21 @@ class UserController extends Controller
 			"name" => "Usuarios",
 			"url_controller" => "user",
 			"url" => "user",
-			"profile" => Profile::where("status", 1)->get()->toArray()
+			"profile" => Profile::where("status", 1)->get()->toArray(),
+			"business" => Business::where("status", 1)->get()->toArray()
 		];
 		if ($request->ajax()) {
 			return datatables()->of(
-	            User::get()
+	            User::with([
+	            	"profile" => function($q) {
+	            		$q->select("id", "name");
+	            		//$q->where("status", 0);
+	            	},
+	            	"business" => function($q) {
+	            		$q->select("id", "name", "number_identifer");
+	            		//$q->where("number_identifer", "like", "%35%");
+	            	}
+	        	])->get()
 	        )->addColumn('action', function ($data){
                 //return DataTableHelper::buttonsActionsByPerfil(\Auth::user()->profile, $url, $data);
                 return ViewHelper::allButtons($data);
@@ -63,17 +75,19 @@ class UserController extends Controller
 			}
 			$obj->save();
 			DB::commit();
+			if (is_null($userId)) {
+				event(new UserCreated($obj));
+			}
 			return response(["rst" => 1, "obj" => $obj, "msj" => "Usuario Creado"]);
 		} catch (Exception $e) {
 			DB::rollback();
 			return response(["rst" => 2, "obj" => [], "msj" => $e->getMessage()]);
 		}
-		print_r($request->all()); dd();
 	}
 	public function show(Request $request)
 	{
 		if (!is_null($request->masterId)) {
-			return response(["rst" => 1, "obj" => User::find($request->masterId)]);
+			return response(["rst" => 1, "obj" => User::with(["business", "businessTwo"])->find($request->masterId)]);
 		}
 		return response(["rst" => 2, "obj" => [], "msj" => ""]);
 	}
@@ -83,6 +97,12 @@ class UserController extends Controller
 	}
 	public function destroy(Request $request)
 	{
-		
+		$masterId = $request->has("masterId")? $request->masterId : null;
+		$obj = User::find($masterId);
+		if (!is_null($obj)) {
+			$obj->delete();
+			return response(["rst" => 1, "msj" => "Usuario Eliminado Correctamente"]);
+		}
+		return response(["rst" => 2, "msj" => "Hubo un Error"]);
 	}
 }

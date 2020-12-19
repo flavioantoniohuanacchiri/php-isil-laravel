@@ -29,6 +29,15 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get("/user", "UserController@index");
 Route::post("/user/store", "UserController@store");
 Route::get("/user/show", "UserController@show");
+<<<<<<< HEAD
 Route::get("/profile", "ProfileController@index");
 Route::post("/profile/store", "ProfileController@store");
 Route::get("/profile/show", "ProfileController@show");
+=======
+Route::post("/user/destroy", "UserController@destroy");
+
+Route::get("/business", "BusinessController@index");
+Route::post("/business/store", "BusinessController@store");
+Route::get("/business/show", "BusinessController@show");
+Route::post("/business/destroy", "BusinessController@destroy");
+>>>>>>> 82e69a7a881dc7ad357b70d5b61cee69dbfe4b35
