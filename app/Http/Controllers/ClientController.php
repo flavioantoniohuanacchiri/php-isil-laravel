@@ -36,7 +36,7 @@ class ClientController extends Controller
 		try {
 			$obj = null;
 			if (is_null($userId)) {
-				$objTmp = CLient::where("document_number", $request->document_number)->first();
+				$objTmp = Client::where("document_number", $request->document_number)->first();
 				if (!is_null($objTmp)) {
 					return response(["rst" => 2, "obj" => [], "msj" => "Existe un CLiente con Tu Documento"]);
 				}

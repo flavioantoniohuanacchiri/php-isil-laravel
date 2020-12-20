@@ -49,3 +49,12 @@ Route::post("/client/store", "ClientController@store");
 Route::get("/client/show", "ClientController@show");
 Route::post("/client/destroy", "ClientController@destroy");
 
+Route::get("/provider", "ProviderController@index");
+Route::post("/provider/store", "ProviderController@store");
+Route::get("/provider/show", "ProviderController@show");
+Route::post("/provider/destroy", "ProviderController@destroy");
+
+Route::get("/category", "CategoryController@index");
+Route::post("/category/store", "CategoryController@store");
+Route::get("/category/show", "CategoryController@show");
+Route::post("/category/destroy", "CategoryController@destroy");

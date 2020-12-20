@@ -3,61 +3,56 @@
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Helpers\ViewHelper;
-use App\Provider;
+use App\Category;
 use DB;
 
-class ProviderController extends Controller
+class CategoryController extends Controller
 {
 	public function index(Request $request)
 	{
 		$site = [
-			"name" => "Proveedores",
-			"url_controller" => "provider",
-			"url" => "provider",
+			"name" => "Categorias",
+			"url_controller" => "category",
+			"url" => "category",
 		];
 		if ($request->ajax()) {
 			return datatables()->of(
-	            Provider::get()
+	            Category::get()
 	        )->addColumn('action', function ($data){
                 //return DataTableHelper::buttonsActionsByPerfil(\Auth::user()->profile, $url, $data);
                 return ViewHelper::allButtons($data);
             })->toJson();
 		}
-		return view("provider", compact("site"));
+		return view("category", compact("site"));
 		
 	}
 	public function store(Request $request)
 	{
 		$userId = $request->has("masterId")? $request->masterId : null;
-		if ($request->document_number == "") {
-			return response(["rst" => 2, "obj" => [], "msj" => "Necesita Ingresar un Documento"]);
-		}
+		
 		DB::beginTransaction();
 		try {
 			$obj = null;
 			if (is_null($userId)) {
-				$objTmp = Provider::where("document_number", $request->document_number)->first();
+				$objTmp = Category::where("name", $request->name)->first();
 				if (!is_null($objTmp)) {
-					return response(["rst" => 2, "obj" => [], "msj" => "Existe un Proveedor con Tu Documento"]);
+					return response(["rst" => 2, "obj" => [], "msj" => "Existe una Categoria con ese Nombre"]);
 				}
-				$obj = new Provider;
+				$obj = new Category;
 			} else {
-				$objTmp = Provider::where("document_number", $request->document_number)->where("id", "<>", $userId)->first();
+				$objTmp = Category::where("name", $request->name)->where("id", "<>", $userId)->first();
 				if (!is_null($objTmp)) {
-					return response(["rst" => 2, "obj" => [], "msj" => "Existe un Proveedor con Tu Documento"]);
+					return response(["rst" => 2, "obj" => [], "msj" => "Existe una Categoria con ese Nombre"]);
 				}
-				$obj = Provider::find($userId);
+				$obj = Category::find($userId);
 			}
 
 			$obj->name = $request->name;
-			$obj->document_type = $request->document_type;
-			$obj->document_number = $request->document_number;
-			$obj->giro = $request->giro;
 			$obj->status = $request->status;
 
 			$obj->save();
 			DB::commit();
-			return response(["rst" => 1, "obj" => $obj, "msj" => "Proveedor Creado"]);
+			return response(["rst" => 1, "obj" => $obj, "msj" => "Categoria Creado"]);
 		} catch (Exception $e) {
 			DB::rollback();
 			return response(["rst" => 2, "obj" => [], "msj" => $e->getMessage()]);
@@ -75,7 +70,7 @@ class ProviderController extends Controller
 					$keyCache,
 					1*60*60,
 					function() use ($masterId) {
-						return Provider::find($masterId);
+						return Category::find($masterId);
 					}
 				);
 			}
@@ -91,10 +86,10 @@ class ProviderController extends Controller
 	public function destroy(Request $request)
 	{
 		$masterId = $request->has("masterId")? $request->masterId : null;
-		$obj = Provider::find($masterId);
+		$obj = Category::find($masterId);
 		if (!is_null($obj)) {
 			$obj->delete();
-			return response(["rst" => 1, "msj" => "Proveedor Eliminado Correctamente"]);
+			return response(["rst" => 1, "msj" => "Categoria Eliminada Correctamente"]);
 		}
 		return response(["rst" => 2, "msj" => "Hubo un Error"]);
 	}
