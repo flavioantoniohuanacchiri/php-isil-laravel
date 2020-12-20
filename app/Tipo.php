@@ -4,13 +4,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Business extends Model
+class Tipo extends Model
 {
 
 	use Notifiable;
 	use SoftDeletes;
 	
-	protected $table = "business";
+	protected $table = "Tipo";
 
 	protected $dates = ['deleted_at'];
     /**
@@ -20,8 +20,14 @@ class Business extends Model
      */
 
 	protected $fillable = [
-        'name','number_identifer', 'address','ubigeo','status'
-	];
+        'code','name','status'
+        ];
+        
+        protected function serializeDate(\DateTimeInterface $date)
+        {
+            return $date->format("d-m-Y h:i:s a");
+        }
+    
 }
 
 

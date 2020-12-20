@@ -35,3 +35,23 @@ Route::get("/business", "BusinessController@index");
 Route::post("/business/store", "BusinessController@store");
 Route::get("/business/show", "BusinessController@show");
 Route::post("/business/destroy", "BusinessController@destroy");
+
+Route::get("/profile", "ProfileController@index");
+Route::post("/profile/store", "ProfileController@store");
+Route::get("/profile/show", "ProfileController@show");
+Route::post("/profile/destroy", "ProfileController@destroy");
+
+Route::get("/articulos", "ArticulosController@index");
+Route::post("/articulos/store", "ArticulosController@store");
+Route::get("/articulos/show", "ArticulosController@show");
+Route::post("/articulos/destroy", "ArticulosController@destroy");
+
+Route::get("/categoria", "CategoriaController@index");
+Route::post("/categoria/store", "CategoriaController@store");
+Route::get("/categoria/show", "CategoriaController@show");
+Route::post("/categoria/destroy", "CategoriaController@destroy");
+
+Route::get("/tipo", "TipoController@index");
+Route::post("/tipo/store", "TipoController@store");
+Route::get("/tipo/show", "TipoController@show");
+Route::post("/tipo/destroy", "TipoController@destroy");

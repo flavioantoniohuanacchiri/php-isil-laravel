@@ -23,6 +23,14 @@ class BaseModel extends Model
                 //$obj->userid_created_at = Auth::user()->id ;
                 //$obj->user_created_at = Auth::user()->name;
             }
+            if (!is_null(Auth::profile())) {
+                //$obj->userid_created_at = Auth::user()->id ;
+                //$obj->user_created_at = Auth::user()->name;
+            }
+            if (!is_null(Auth::business())) {
+                //$obj->userid_created_at = Auth::user()->id ;
+                //$obj->user_created_at = Auth::user()->name;
+            }
         });
 
         static::updating(function ($obj) {
@@ -30,6 +38,14 @@ class BaseModel extends Model
                 //$obj->userid_updated_at =  Auth::user()->id ;
                 //$obj->user_updated_at = Auth::user()->name;
              }
+             if (!is_null(Auth::profile())) {
+                //$obj->userid_updated_at =  Auth::user()->id ;
+                //$obj->user_updated_at = Auth::user()->name;
+             }
+             if (!is_null(Auth::business())) {
+                //$obj->userid_created_at = Auth::user()->id ;
+                //$obj->user_created_at = Auth::user()->name;
+            }
         });
 
         static::deleting(function ($obj) {

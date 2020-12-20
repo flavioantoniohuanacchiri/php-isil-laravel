@@ -15,9 +15,8 @@
     <!--<th>Apellidos</th>
     <th>Usuario</th>-->
     <th>Email</th>
-    <th>Perfil</th>
-    <th>Empresa</th>
-    <!--<th>Estado</th>
+     <th>Estado</th>
+     <!--<th>Sede</th>
     <th>Intentos</th>-->
     <th>Actualizado</th>
     <th class="column-options">[]</th>
@@ -27,27 +26,13 @@
 <script type="text/javascript">
     columnsTable = [
     	{"data": "name"},
-        /*{"data": "full_name"},
+        /* {"data": "full_name"},
         {"data": "last_name"},
-        {"data": "user_name"},*/
+        {"data": "user_name"}, */
         {"data": "email"},
-        //{"data": "profile_id"},
-        {"data": function ( row, type, val, meta ) {
-            let profile = "";
-            if (row.profile!=null && row.profile !="null") {
-                return row.profile.name;
-            }
-            return "";
-        }, name: 'profile_id'},
-        {"data": function ( row, type, val, meta ) {
-            let business = "";
-            if (row.business!=null && row.business !="null") {
-                return row.business.name;
-            }
-            return "";
-        }, name: 'business_id'},
-        /*{"data": "status"},
-        {"data": "num_intentos"},*/
+         {"data": "status"},
+          /**{"data": "sede"},
+        /**{"data": "num_intentos"},*/
         {"data" : "updated_at"},
         {"data": 'action', name: 'action', orderable: false, searchable: false}
     ];
@@ -60,7 +45,7 @@
     functionRowTable = function(nRow, aData) {
         if (aData!=null && aData!="null" && aData["status"] !=null && aData["status"] !="null") {
             let htmlTmp = Master.htmlStatus(aData['status']);
-            $(nRow).find('td:eq(4)').html(htmlTmp);
+            $(nRow).find('td:eq(2)').html(htmlTmp);
         }
     };
     $("#belongs_business").click(function(e) {
@@ -86,6 +71,11 @@
         <label>Empresa</label>
         <select name="business_id" class="form-control select2" data-placeholder="Seleccione una Empresa" id="businessId" style="width: 100%;">
             <option value="">Seleccione</option>
+            @if(isset($site["business"]))
+            	@foreach($site["business"] as $key => $value)
+            	   <option value="{{$value['id']}}">{{$value['name']}}</option>
+            	@endforeach
+            @endif
             
         </select>
     </div>
@@ -108,6 +98,10 @@
     <div class="form-group">
         <label>DNI *</label>
         <input type="text" name="document_number" class="form-control solo-enteros" required />
+    </div>
+    <div class="form-group">
+        <label>Sede *</label>
+        <input type="text" name="sede" class="form-control" required  />
     </div>
     <div class="form-group">
         <label>Perfiles</label>

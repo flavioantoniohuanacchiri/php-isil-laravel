@@ -1,9 +1,9 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="/" class="brand-link">
-      <img src="{{ asset('adminlte3/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8; margin-left: 0px;">
-      <span class="brand-text font-weight-light">{{env("APP_NAME", "")}}</span>
+    <a href="../../index3.html" class="brand-link">
+      <img src="{{asset('images/logo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">{{config('app.name')}}</span>
     </a>
     <!-- Sidebar -->
     <div class="sidebar">
@@ -18,32 +18,293 @@
         </div>
         <!-- Sidebar Menu -->
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true">
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link active">
                         <i class="nav-icon fas fa-circle"></i>
-                            <p>{{trans("layout.sidebar.master")}}
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                            <ul class="nav nav-treeview" >
-                                <li class="nav-item has-treeview">
-                                    <a href="/user" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>{{trans("layout.sidebar.user")}}
-                                            <i class="right fas fa-angle-left"></i>
-                                        </p>
-                                    </a>
-                                </li>
-                                <li class="nav-item has-treeview">
-                                    <a href="/profile" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>{{trans("layout.sidebar.profile")}}
-                                            <i class="right fas fa-angle-left"></i>
-                                        </p>
-                                    </a>
-                                </li>
-                            </ul>
+                        <p>{{trans("layout.sidebar.admin")}}
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                        <ul class="nav nav-treeview" >
+                            <li class="nav-item has-treeview">
+                                <a href="/user" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>{{trans("layout.sidebar.user")}}
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item has-treeview">
+                                <a href="/profile" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>{{trans("layout.sidebar.profile")}}
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item has-treeview">
+                                <a href="/business" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>{{trans("layout.sidebar.business")}}
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item has-treeview">
+                                <a href="/Ventas" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>{{trans("layout.sidebar.ventas")}}
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item has-treeview">
+                                <a href="/cliente" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>{{trans("layout.sidebar.cliente")}}
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
                     </a>
+                </li>
+            </ul>
+            @php
+                $pathUrl = \Request::path();
+                if ($pathUrl != "/") {
+                    $pathUrl = "/".\Request::path();
+                }
+            @endphp
+            @if(isset($site))
+                @if(isset($site["modules"]))
+                    @if (count($site["modules"]) > 0)
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                            @php
+                                $i = 0;
+                            @endphp
+                            @foreach($site["modules"] as $key => $value)
+                                @if (isset($value["parent"]))
+                                    @php
+                                        $parent = $value["parent"];
+                                        $modules = $value["modules"];
+                                        $openModule = false;
+                                        foreach($modules as $key2 => $value2) {
+                                            if ($value2["url"] == $pathUrl) {
+                                                $openModule = true;
+                                                break;
+                                            }
+                                        }
+                                    @endphp
+                                    <li class="nav-item has-treeview {{($openModule)? 'menu-open' : ''}}">
+                                        <a href="#" class="nav-link {{($openModule)? 'active' : ''}}">
+                                            <i class="nav-icon {{($parent['class_icon'] == '')? 'fas fa-circle' : $parent['class_icon']}}"></i>
+                                            <p>{{$parent['name']}}
+                                                <i class="right fas fa-angle-left"></i>
+                                            </p>
+                                        </a>
+                                        @if(count($modules) > 0)
+                                        <ul class="nav nav-treeview">
+                                            @php
+                                                $j = 0;
+                                            @endphp
+                                            @foreach($modules as $key2 => $value2)
+                                            <li class="nav-item has-treeview">
+                                                <a href="{{($value2['num_childs'] > 0)? '#' : $value2['url']}}" class="nav-link {{($value2['url'] == $pathUrl)? 'active' : ''}}">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>{{$value2['name']}}
+                                                        @if ($value2["num_childs"] > 0)
+                                                            <i class="right fas fa-angle-left"></i>
+                                                        @endif
+                                                    </p>
+                                                </a>
+                                                @if ($value2["num_childs"] > 0)
+                                                    <ul class="nav nav-treeview">
+                                                        <li class="nav-item">
+                                                          <a href="#" class="nav-link">
+                                                            <i class="far fa-dot-circle nav-icon"></i>
+                                                            <p>Level 3</p>
+                                                          </a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                          <a href="#" class="nav-link">
+                                                            <i class="far fa-dot-circle nav-icon"></i>
+                                                            <p>Level 3</p>
+                                                          </a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                          <a href="#" class="nav-link">
+                                                            <i class="far fa-dot-circle nav-icon"></i>
+                                                            <p>Level 3</p>
+                                                          </a>
+                                                        </li>
+                                                    </ul>
+                                                @endif
+                                            </li>
+                                            @php
+                                                $j++;
+                                            @endphp
+                                            @endforeach
+                                        </ul>
+                                        @endif
+                                    </li>
+                                @endif
+                                @php
+                                    $i++;
+                                @endphp
+                            @endforeach
+                        </ul>
+                    @endif
+                @endif
+            @endif
+        </nav>
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true">
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link active">
+                        <i class="nav-icon fas fa-circle"></i>
+                        <p>{{trans("layout.sidebar.mante")}}
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                        <ul class="nav nav-treeview" >
+                            <li class="nav-item has-treeview">
+                                <a href="/articulos" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>{{trans("layout.sidebar.articulo")}}
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item has-treeview">
+                                <a href="/categoria" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>{{trans("layout.sidebar.categoria")}}
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item has-treeview">
+                                <a href="/tipo" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>{{trans("layout.sidebar.tipo")}}
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </a>
+                </li>
+            </ul>
+            @php
+                $pathUrl = \Request::path();
+                if ($pathUrl != "/") {
+                    $pathUrl = "/".\Request::path();
+                }
+            @endphp
+            @if(isset($site))
+                @if(isset($site["modules"]))
+                    @if (count($site["modules"]) > 0)
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                            @php
+                                $i = 0;
+                            @endphp
+                            @foreach($site["modules"] as $key => $value)
+                                @if (isset($value["parent"]))
+                                    @php
+                                        $parent = $value["parent"];
+                                        $modules = $value["modules"];
+                                        $openModule = false;
+                                        foreach($modules as $key2 => $value2) {
+                                            if ($value2["url"] == $pathUrl) {
+                                                $openModule = true;
+                                                break;
+                                            }
+                                        }
+                                    @endphp
+                                    <li class="nav-item has-treeview {{($openModule)? 'menu-open' : ''}}">
+                                        <a href="#" class="nav-link {{($openModule)? 'active' : ''}}">
+                                            <i class="nav-icon {{($parent['class_icon'] == '')? 'fas fa-circle' : $parent['class_icon']}}"></i>
+                                            <p>{{$parent['name']}}
+                                                <i class="right fas fa-angle-left"></i>
+                                            </p>
+                                        </a>
+                                        @if(count($modules) > 0)
+                                        <ul class="nav nav-treeview">
+                                            @php
+                                                $j = 0;
+                                            @endphp
+                                            @foreach($modules as $key2 => $value2)
+                                            <li class="nav-item has-treeview">
+                                                <a href="{{($value2['num_childs'] > 0)? '#' : $value2['url']}}" class="nav-link {{($value2['url'] == $pathUrl)? 'active' : ''}}">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>{{$value2['name']}}
+                                                        @if ($value2["num_childs"] > 0)
+                                                            <i class="right fas fa-angle-left"></i>
+                                                        @endif
+                                                    </p>
+                                                </a>
+                                                @if ($value2["num_childs"] > 0)
+                                                    <ul class="nav nav-treeview">
+                                                        <li class="nav-item">
+                                                          <a href="#" class="nav-link">
+                                                            <i class="far fa-dot-circle nav-icon"></i>
+                                                            <p>Level 3</p>
+                                                          </a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                          <a href="#" class="nav-link">
+                                                            <i class="far fa-dot-circle nav-icon"></i>
+                                                            <p>Level 3</p>
+                                                          </a>
+                                                        </li>
+                                                    </ul>
+                                                @endif
+                                            </li>
+                                            @php
+                                                $j++;
+                                            @endphp
+                                            @endforeach
+                                        </ul>
+                                        @endif
+                                    </li>
+                                @endif
+                                @php
+                                    $i++;
+                                @endphp
+                            @endforeach
+                        </ul>
+                    @endif
+                @endif
+            @endif
+        </nav>
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true">
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link active">
+                        <i class="nav-icon fas fa-circle"></i>
+                        <p>{{trans("layout.sidebar.master")}}
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                        <ul class="nav nav-treeview" >
+                            <li class="nav-item has-treeview">
+                                <a href="/user" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>{{trans("layout.sidebar.Cliente")}}
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item has-treeview">
+                                <a href="/profile" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>{{trans("layout.sidebar.Ventas")}}
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </a>
+                </li>
             </ul>
             @php
                 $pathUrl = \Request::path();

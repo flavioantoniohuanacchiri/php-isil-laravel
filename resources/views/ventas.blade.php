@@ -7,16 +7,14 @@
 </style>
 @endpush
 @section('title_list')
-	Listado de Perfiles
+  Listado de Ventas
 @endsection
 @section('columns_head')
 <tr>
     <th>Codigo</th>
-    <!--<th>Apellidos</th>
-    <th>Usuario</th>-->
     <th>Descripcion</th>
+    <th>Articulos</th>
     <th>Estado</th> 
-    <!--<th>Intentos</th>-->
     <th>Actualizado</th>
     <th class="column-options">[]</th>
 </tr>
@@ -24,14 +22,20 @@
 @section("script_master")
 <script type="text/javascript">
     columnsTable = [
-    	{"data": "code"},
+      {"data": "code"},
         {"data": "name"},
+        {"data": function (row,type,val,meta) {
+            let articulos="";
+            if (row.articulos !=null && row.articulos !="null"){
+                return row.articulos.name;
+            } return "";
+        },name: 'articulos_id'},
         {"data": "status"},  
         {"data" : "updated_at"},
         {"data": 'action', name: 'action', orderable: false, searchable: false}
     ];
-    confirmDelete["titleMessage"] = "Eliminación de Perfil";
-    confirmDelete["textMessage"] = "¿Desea Eliminar este Peril?";
+    confirmDelete["titleMessage"] = "Eliminación de venta";
+    confirmDelete["textMessage"] = "¿Desea Eliminar esta venta?";
 </script>
 @endsection
 @push("js_master")
@@ -39,11 +43,11 @@
     functionRowTable = function(nRow, aData) {
         if (aData!=null && aData!="null" && aData["status"] !=null && aData["status"] !="null") {
             let htmlTmp = Master.htmlStatus(aData['status']);
-            $(nRow).find('td:eq(2)').html(htmlTmp);
+            $(nRow).find('td:eq(3)').html(htmlTmp);
         }
     };
     $("#mdlStore").on("hide.bs.modal", function(event) {
-        $("#profileId").val([]).trigger("change");
+        $("#ventasId").val([]).trigger("change");
     });
 </script>
 @endpush
@@ -57,7 +61,18 @@
         <label>Descripción *</label>
         <input type="text" name="name" class="form-control" required />
     </div>
-  
+    <div class="form-group">
+        <label>articulo</label>
+        <select name="articulos_id" class="form-control select2" data-placeholder="Seleccione una articulo" style="width: 100%;">
+            <option value="">Seleccione</option>
+            @if(isset($site["articulo"]))
+              @foreach($site["articulo"] as $key => $value)
+              <option value="{{$value['id']}}">{{$value['name']}}</option>
+              @endforeach
+            @endif
+        </select>
+    </div>
+
     <div class="form-group" >
         <label>Estado *</label>
         <select class="form-control select2" name="status" data-placeholder="Seleccione un Estado" style="width: 100%;">

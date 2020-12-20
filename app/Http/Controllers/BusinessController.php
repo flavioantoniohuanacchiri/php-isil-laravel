@@ -13,9 +13,10 @@ class BusinessController extends Controller
 	public function index(Request $request)
 	{
 		$site = [
-			"name" => "Empresas",
+			"name" => "Business",
 			"url_controller" => "business",
-			"url" => "business",
+			"url" => "business",  
+			"business" => Business::where("status", 1)->get()->toArray()
 		];
 		if ($request->ajax()) {
 			return datatables()->of(
@@ -30,40 +31,45 @@ class BusinessController extends Controller
 	}
 	public function store(Request $request)
 	{
-		$userId = $request->has("masterId")? $request->masterId : null;
-		if ($request->document_number == "") {
+		
+		$businessId = $request->has("masterId")? $request->masterId : null;
+		if ($request->number_identifer == "") {
 			return response(["rst" => 2, "obj" => [], "msj" => "Necesita Ingresar un Documento"]);
 		}
+		 
 		DB::beginTransaction();
 		try {
 			$obj = null;
-			if (is_null($userId)) {
-				$objTmp = User::where("document_number", $request->document_number)->first();
+			if (is_null($businessId)) {		
+			    $obj = new Business;
+			}else{
+				$obj = Business::find($businessId);
+			}
+			/**if (is_null($businessId)) {
+				$objTmp = Business::where("number_identifer", $request->number_identifer)->first();
 				if (!is_null($objTmp)) {
-					return response(["rst" => 2, "obj" => [], "msj" => "Existe un Usuario con Tu Documento"]);
+					return response(["rst" => 2, "obj" => [], "msj" => "Existe un Business con Tu Documento"]);
 				}
-				$obj = new User;
+				$obj = new Business;
 			} else {
-				$objTmp = User::where("document_number", $request->document_number)->where("id", "<>", $userId)->first();
+				$objTmp = Business::where("number_identifer", $request->number_identifer)->where("id", "<>", $businessId)->first();
 				if (!is_null($objTmp)) {
-					return response(["rst" => 2, "obj" => [], "msj" => "Existe un Usuario con Tu Documento"]);
+					return response(["rst" => 2, "obj" => [], "msj" => "Existe un Business con Tu Documento"]);
 				}
-				$obj = User::find($userId);
-			}
-			$obj->name = $request->full_name." ".$request->full_name;
-			$obj->full_name = $request->full_name;
-			$obj->last_name = $request->last_name;
-			$obj->email = $request->email;
-			$obj->user_name = $request->user_name;
-			$obj->document_number = $request->document_number;
-			$obj->profile_id = $request->profile_id;
+				$obj = Business::find($businessId);
+			}*/
+			/**return response(["rst" => 1, "obj" => [],'msj' => $request->name]);*/
+			/**$obj->id = $request->id;*/
+			$obj->name = $request->name;
+			$obj->number_identifer = $request->number_identifer;
+			$obj->address = $request->address;
+			$obj->ubigeo = $request->ubigeo;			
+			$obj->status = $request->status;
+			
 
-			if ($request->password !="") {
-				$obj->password = \Hash::make($request->password);
-			}
 			$obj->save();
 			DB::commit();
-			return response(["rst" => 1, "obj" => $obj, "msj" => "Usuario Creado"]);
+			return response(["rst" => 1, "obj" => $obj, "msj" => "Business Creado"]);
 		} catch (Exception $e) {
 			DB::rollback();
 			return response(["rst" => 2, "obj" => [], "msj" => $e->getMessage()]);
@@ -71,24 +77,34 @@ class BusinessController extends Controller
 	}
 	public function show(Request $request)
 	{
-		$keyCache = "showBusiness";
+		$masterId = $request->has("masterId")? $request->masterId : null;
+		$obj = Business::find($masterId);
+		/**$business = $obj->business;*/
+
 		if (!is_null($request->masterId)) {
-			$keyCache.="_".$request->masterId;
-			$masterId = $request->masterId;
-			$obj = \Cache::get($keyCache);
-			if (!$obj) {
-				$obj = \Cache::remember(
-					$keyCache,
-					1*60*60,
-					function() use ($masterId) {
-						return Business::find($masterId);
-					}
-				);
-			}
-			return response(["rst" => 1, "obj" => $obj]);
-			//return response(["rst" => 1, "obj" => User::with("business", "businessTwo")->find($request->masterId)]);
+			return response(["rst" => 1, "obj" => $obj, "msj" => ""]);
+			/**return response(["rst" => 1, "obj" => User::with("business", "businessTwo")->find($request->masterId)]);*/
+			/**return response(["rst" => 1, "obj" => Profile::with("profile", "profile")->find($request->masterId)]);*/
 		}
 		return response(["rst" => 2, "obj" => [], "msj" => ""]);
+
+		 /**$keyCache = "showBusiness";
+		 if (!is_null($request->masterId)) {
+		 	$keyCache.="_".$request->masterId;
+		 	$masterId = $request->masterId;
+		 	$obj = \Cache::get($keyCache);
+		 	if (!$obj) {
+		 		$obj = \Cache::remember(
+		 			$keyCache,
+		 			1*60*60,
+		 			function() use ($masterId) {
+		 				return Business::find($masterId);
+		 			}
+		  		);
+			 }*/
+		
+		 
+	
 	}
 	public function update(Request $request)
 	{
@@ -97,10 +113,10 @@ class BusinessController extends Controller
 	public function destroy(Request $request)
 	{
 		$masterId = $request->has("masterId")? $request->masterId : null;
-		$obj = User::find($masterId);
+		$obj = Business::find($masterId);
 		if (!is_null($obj)) {
 			$obj->delete();
-			return response(["rst" => 1, "msj" => "Usuario Eliminado Correctamente"]);
+			return response(["rst" => 1, "msj" => "Business Eliminado Correctamente"]);
 		}
 		return response(["rst" => 2, "msj" => "Hubo un Error"]);
 	}

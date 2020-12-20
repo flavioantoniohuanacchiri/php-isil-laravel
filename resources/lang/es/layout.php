@@ -2,8 +2,18 @@
 
 return [
 	"sidebar" => [
-		"master" => "Mantenimientos",
+		"admin" => "Administrativo",
 		"user" => "Usuarios",
-		"profile" => "Perfiles"
+		"profile" => "Perfiles",
+		"business"=> "Empresas",
+		"profetion"=>"Profesiones",
+		"master" => "Negocio",
+		"mante"  => "Mantenimiento",
+		"articulo" =>"Articulos",
+		"tipo"=>"Tipo",
+		"categoria"=>"Categoria",
+		"Cliente"=>"Cliente",
+		"Ventas"=>"Ventas",
+
 	]
 ];
