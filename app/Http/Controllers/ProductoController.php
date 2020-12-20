@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Categoria;
-use App\Producto;
 use APP\Proveedor;
+use App\Producto;
 use Illuminate\Http\Request;
 use App\Helpers\ViewHelper;
 use App\Events\UserCreated;

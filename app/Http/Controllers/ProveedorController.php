@@ -51,8 +51,8 @@ class ProveedorController extends Controller
 				$obj = Proveedor::find($userId);
 			}
 			
-			$obj->nombre = $request->nombre;
-			$obj->apellido = $request->apellido;
+			$obj->empresa = $request->empresa;
+			$obj->contacto = $request->contacto;
 			$obj->document_number = $request->document_number;
 			$obj->email = $request->email;
 			$obj->status = $request->status;

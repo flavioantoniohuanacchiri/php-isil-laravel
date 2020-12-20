@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Proveedor extends Model
 {
-    protected $fillable = ['nombre', 'apellido', 'document_number','email','status'];
+    protected $fillable = ['empresa', 'contacto', 'document_number','email','status'];
     protected $table = "proveedor";
 
     protected function serializeDate(\DateTimeInterface $date)

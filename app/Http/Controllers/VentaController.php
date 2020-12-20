@@ -16,14 +16,14 @@ class VentaController extends Controller
 {
     public function index()
     {
-        $ventas = Venta::with('producto')->get();
+        $venta = Venta::with('producto')->get();
 
         return view('venta.index', compact('venta'));
     }
 
     public function create()
     {
-        $productos = Producto::all();
+        $producto = Producto::all();
         return view('venta.create', compact('producto'));
     }
 
@@ -33,14 +33,14 @@ class VentaController extends Controller
 		try {
             $venta = Venta::create($request->all());
             
-            $productos = $request->input('producto', []);
+            $producto = $request->input('producto', []);
          
             $quantities = $request->input('quantities', []);
 
             //dd($productos);
-            for ($producto =0; $producto < count($productos); $producto ++) {
-                if ($productos[$producto] != '') {
-                    $venta->producto()->attach($productos[$producto], ['quantity' => $quantities[$producto]] );
+            for ($producto =0; $producto < count($producto); $producto ++) {
+                if ($producto[$producto] != '') {
+                    $venta->producto()->attach($producto[$producto], ['quantity' => $quantities[$producto]] );
                 }
             }
           DB::commit();
@@ -68,11 +68,11 @@ class VentaController extends Controller
         $venta->update($request->all());
 
         $venta->producto()->detach();
-        $productos = $request->input('producto', []);
+        $producto = $request->input('producto', []);
         $quantities = $request->input('quantities', []);
-        for ($producto =0; $producto < count($productos); $producto++) {
-            if ($productos[$producto] != '') {
-                $venta->producto()->attach($productos[$producto], ['quantity' => $quantities[$producto]] );
+        for ($producto =0; $producto < count($producto); $producto++) {
+            if ($producto[$producto] != '') {
+                $venta->producto()->attach($producto[$producto], ['quantity' => $quantities[$producto]] );
             }
         }
 

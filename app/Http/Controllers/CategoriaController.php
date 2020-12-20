@@ -92,7 +92,7 @@ class CategoriaController extends Controller
 		$obj = Categoria::find($masterId);
 		if (!is_null($obj)) {
 			$obj->delete();
-			return response(["rst" => 1, "msj" => "CategorÍa Eliminado Correctamente"]);
+			return response(["rst" => 1, "msj" => "CategorÍa Eliminada Correctamente"]);
 		}
 		return response(["rst" => 2, "msj" => "Hubo un Error"]);
     }
