@@ -44,21 +44,19 @@
                         </thead>
                         <tbody>
                             @foreach (old('productos', ['']) as $index => $oldProducto)
-                                <tr id="producto{{$loop->index}}">
+                                <tr id="producto{{ $index }}">
                                     <td>
-                                        <select name="producto[]" class="form-control">
+                                        <select name="productos[]" class="form-control">
                                             <option value="">-- seleccione un producto --</option>
                                             @foreach ($productos as $producto)
-                                                <option value="{{ $producto->id }}"
-                                                @if (old('producto.' . $loop->parent->index) == $producto->id) selected @endif
-                                            >{{ $producto->nombre }} (${{ number_format($producto->precio, 2) }})
-
+                                                <option value="{{ $producto->id }}"{{ $oldProducto = $producto->id ? ' selected' : '' }}>
+                                                    {{ $producto->nombre }} (${{ number_format($producto->precio, 2) }})
                                                 </option>
                                             @endforeach
                                         </select>
                                     </td>
                                     <td>
-                                    <input type="number" name="quantities[]" class="form-control" value="{{ old('quantities.' . $loop->index) ?? '1' }}" />
+                                        <input type="number" name="quantities[]" class="form-control" value="{{ old('quantities.' . $index) ?? '1' }}" />
                                     </td>
                                 </tr>
                             @endforeach

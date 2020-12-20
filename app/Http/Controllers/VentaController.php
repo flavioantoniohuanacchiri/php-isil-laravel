@@ -23,8 +23,8 @@ class VentaController extends Controller
 
     public function create()
     {
-        $producto = Producto::all();
-        return view('venta.create', compact('producto'));
+        $productos = Producto::all();
+        return view('venta.create', compact('productos'));
     }
 
     public function store(StoreOrderRequest $request)
@@ -33,14 +33,14 @@ class VentaController extends Controller
 		try {
             $venta = Venta::create($request->all());
             
-            $producto = $request->input('producto', []);
+            $productos = $request->input('producto', []);
          
             $quantities = $request->input('quantities', []);
 
             //dd($productos);
-            for ($producto =0; $producto < count($producto); $producto ++) {
-                if ($producto[$producto] != '') {
-                    $venta->producto()->attach($producto[$producto], ['quantity' => $quantities[$producto]] );
+            for ($producto =0; $producto < count($productos); $producto ++) {
+                if ($productos[$producto] != '') {
+                    $venta->producto()->attach($productos[$producto], ['quantity' => $quantities[$producto]] );
                 }
             }
           DB::commit();
@@ -68,11 +68,11 @@ class VentaController extends Controller
         $venta->update($request->all());
 
         $venta->producto()->detach();
-        $producto = $request->input('producto', []);
+        $productos = $request->input('producto', []);
         $quantities = $request->input('quantities', []);
-        for ($producto =0; $producto < count($producto); $producto++) {
-            if ($producto[$producto] != '') {
-                $venta->producto()->attach($producto[$producto], ['quantity' => $quantities[$producto]] );
+        for ($producto =0; $producto < count($productos); $producto++) {
+            if ($productos[$producto] != '') {
+                $venta->producto()->attach($productos[$producto], ['quantity' => $quantities[$producto]] );
             }
         }
 

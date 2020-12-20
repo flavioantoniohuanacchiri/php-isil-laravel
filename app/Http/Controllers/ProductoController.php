@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Categoria;
-use APP\Proveedor;
+use App\Proveedor;
 use App\Producto;
 use Illuminate\Http\Request;
 use App\Helpers\ViewHelper;
@@ -18,9 +18,10 @@ class ProductoController extends Controller
         $site = [
 			"name" => "Productos",
 			"url_controller" => "producto",
-            "url" => "producto",
-			"categoria" => Categoria::where("estado", '1')->get()->toArray(),
+			"url" => "producto",
 			"proveedor" => Proveedor::where("status",'1')->get()->toArray(),
+			"categoria" => Categoria::where("estado", '1')->get()->toArray(),
+			
 		];
 		if ($request->ajax()) {
 			 return datatables()->of(
@@ -29,7 +30,7 @@ class ProductoController extends Controller
 						$q->select("id", "nombre");
 					},
 					"proveedor" => function($q) {
-						$q->select("id", "nombre");
+						$q->select("id", "empresa");
 	            	},
 	        	])->get()
 	        )->addColumn('action', function ($data){
@@ -68,9 +69,9 @@ class ProductoController extends Controller
 			$obj->nombre = $request->nombre;
 			$obj->precio = $request->precio;
 			$obj->estado = $request->estado;
-			$obj->categoria_id = $request->categoria_id;
 			$obj->proveedor_id = $request->proveedor_id;
-
+			$obj->categoria_id = $request->categoria_id;		
+						
 			$obj->save();
 			DB::commit();
 			return response(["rst" => 1, "obj" => $obj, "msj" => "Producto Creado"]);
