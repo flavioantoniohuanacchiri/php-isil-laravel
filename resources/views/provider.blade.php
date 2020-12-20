@@ -68,9 +68,8 @@
         <label>Tipo de documento *</label>
         <select class="form-control select2" name="document_type" data-placeholder="Seleccione un Tipo de Documento" style="width: 100%;">
             <option value="">Seleccione</option>
-            <option value="DNI">DNI</option>
-            <option value="CE">CE</option>
-            <option value="Pasaporte">Pasaporte</option>
+            <option value="RUC">RUC</option>
+            <option value="RUS">RUS</option>
         </select>
     </div>
     <div class="form-group">

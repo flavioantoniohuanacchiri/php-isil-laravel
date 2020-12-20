@@ -44,7 +44,7 @@
     functionRowTable = function(nRow, aData) {
         if (aData!=null && aData!="null" && aData["status"] !=null && aData["status"] !="null") {
             let htmlTmp = Master.htmlStatus(aData['status']);
-            $(nRow).find('td:eq(3)').html(htmlTmp);
+            $(nRow).find('td:eq(2)').html(htmlTmp);
         }
     };
     $("#belongs_business").click(function(e) {
@@ -80,7 +80,8 @@
         </select>
     </div>
     <div class="form-group">
-        <label>Categoría *</label>
+        <a class="btn btn-primary" style="float: right" href="category" target="_blank"><i class="fas fa-plus"></i></a>
+        <label>Categoría * </label>
         <select class="form-control select2" name="category_id" data-placeholder="Seleccione un Estado" style="width: 100%;">
             <option value="">Seleccione</option>
             @if(isset($site["category"]))

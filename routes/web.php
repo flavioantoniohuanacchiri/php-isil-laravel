@@ -63,3 +63,8 @@ Route::get("/category", "CategoryController@index");
 Route::post("/category/store", "CategoryController@store");
 Route::get("/category/show", "CategoryController@show");
 Route::post("/category/destroy", "CategoryController@destroy");
+
+Route::get("/product", "ProductController@index");
+Route::post("/product/store", "ProductController@store");
+Route::get("/product/show", "ProductController@show");
+Route::post("/product/destroy", "ProductController@destroy");

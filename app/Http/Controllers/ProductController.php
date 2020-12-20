@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Helpers\ViewHelper;
 use App\Product;
+use App\Category;
 use DB;
 
 class ProductController extends Controller
