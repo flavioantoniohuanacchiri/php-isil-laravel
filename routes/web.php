@@ -40,3 +40,8 @@ Route::get("/client", "ClientController@index");
 Route::post("/client/store", "ClientController@store");
 Route::get("/client/show", "ClientController@show");
 Route::post("/client/destroy", "ClientController@destroy");
+
+Route::get("/attributetype", "AttributeTypeController@index");
+Route::post("/attributetype/store", "AttributeTypeController@store");
+Route::get("/attributetype/show", "AttributeTypeController@show");
+Route::post("/attributetype/destroy", "AttributeTypeController@destroy");
