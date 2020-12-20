@@ -7,25 +7,38 @@
 </style>
 @endpush
 @section('title_list')
-	Listado de Perfiles
+	Listado de Clientes
 @endsection
 @section('columns_head')
 <tr>
-    <th>Rol</th>
-    <th>Estatus</th>
+    <th>Nombres</th>
+    <th>Apellidos</th>
+    <th>Tipo de documento</th>
+    <th>Numero de documento</th>
+    <th>Direccion</th>
+    <th>Teléfono</th>
+    <th>Email</th>
+    <th>Estado</th>
+    <th>Actualizado</th>
     <th class="column-options">[]</th>
 </tr>
 @endsection
 @section("script_master")
 <script type="text/javascript">
     columnsTable = [
-        {"data": "rol"},
+    	{"data": "first_name"},
+        {"data": "last_name"},
+        {"data": "document_type"},
+        {"data": "document_number"},
+        {"data": "address"},
+        {"data": "phone"},
+        {"data": "email"},
         {"data": "status"},
         {"data" : "updated_at"},
         {"data": 'action', name: 'action', orderable: false, searchable: false}
     ];
-    confirmDelete["titleMessage"] = "Eliminación de Perfil";
-    confirmDelete["textMessage"] = "¿Desea Eliminar este Perfil?";
+    confirmDelete["titleMessage"] = "Eliminación de Cliente";
+    confirmDelete["textMessage"] = "¿Desea Eliminar este Cliente?";
 </script>
 @endsection
 @push("js_master")
@@ -33,7 +46,7 @@
     functionRowTable = function(nRow, aData) {
         if (aData!=null && aData!="null" && aData["status"] !=null && aData["status"] !="null") {
             let htmlTmp = Master.htmlStatus(aData['status']);
-            $(nRow).find('td:eq(4)').html(htmlTmp);
+            $(nRow).find('td:eq(7)').html(htmlTmp);
         }
     };
     $("#belongs_business").click(function(e) {
@@ -53,21 +66,38 @@
 @endpush
 @section("content_form_modal")
     <div class="form-group">
-        <label><input type="checkbox" id="belongs_business"><span>Pertenece a una Area</span></label>
+        <label>Nombres *</label>
+        <input type="text" name="first_name" class="form-control" />
     </div>
-    <div class="form-group" id="div-business" style="display: none;">
-        <label>Area</label>
-        <select name="business_id" class="form-control select2" data-placeholder="Seleccione una Area" id="businessId" style="width: 100%;">
+    <div class="form-group">
+        <label>Apellidos *</label>
+        <input type="text" name="last_name" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label>Tipo de documento *</label>
+        <select class="form-control select2" name="document_type" data-placeholder="Seleccione un Tipo de Documento" style="width: 100%;">
             <option value="">Seleccione</option>
-            
+            <option value="DNI">DNI</option>
+            <option value="CE">CE</option>
+            <option value="Pasaporte">Pasaporte</option>
         </select>
     </div>
-    
     <div class="form-group">
-        <label>Rol *</label>
-        <input type="text" name="rol" class="form-control" />
+        <label>Numero de documento *</label>
+        <input type="text" name="document_number" class="form-control" />
     </div>
-      
+    <div class="form-group">
+        <label>Direccion *</label>
+        <input type="text" name="address" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label>Teléfono *</label>
+        <input type="text" name="phone" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label>Email *</label>
+        <input type="text" name="email" class="form-control"/>
+    </div>
     <div class="form-group">
         <label>Estado *</label>
         <select class="form-control select2" name="status" data-placeholder="Seleccione un Estado" style="width: 100%;">

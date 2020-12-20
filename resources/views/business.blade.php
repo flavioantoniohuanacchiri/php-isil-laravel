@@ -7,15 +7,14 @@
 </style>
 @endpush
 @section('title_list')
-	Listado de Empresas
+	Listado de Business
 @endsection
 @section('columns_head')
 <tr>
-
+    <th>RUC</th>
     <th>Razón Social</th>
     <!--<th>Apellidos</th>
     <th>Usuario</th>-->
-    <th>RUC</th>
     <th>Dirección</th>
     <!--<th>Estado</th>
     <th>Intentos</th>-->
@@ -32,8 +31,9 @@
         /*{"data": "full_name"},
         {"data": "last_name"},
         {"data": "user_name"},*/
-        {"data": "number_identifer"},
         {"data": "address"},
+        {"data": "number_identifer"},
+       
         {"data": "status"},
         /*{"data": "num_intentos"},*/
         {"data" : "updated_at"},
