@@ -35,3 +35,8 @@ Route::get("/business", "BusinessController@index");
 Route::post("/business/store", "BusinessController@store");
 Route::get("/business/show", "BusinessController@show");
 Route::post("/business/destroy", "BusinessController@destroy");
+
+Route::get("/client", "ClientController@index");
+Route::post("/client/store", "ClientController@store");
+Route::get("/client/show", "ClientController@show");
+Route::post("/client/destroy", "ClientController@destroy");
