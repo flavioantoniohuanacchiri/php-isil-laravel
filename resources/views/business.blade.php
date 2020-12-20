@@ -7,17 +7,18 @@
 </style>
 @endpush
 @section('title_list')
-	Listado de Empresas
+	Listado de Business
 @endsection
 @section('columns_head')
 <tr>
+    <th>RUC</th>
     <th>Razón Social</th>
     <!--<th>Apellidos</th>
     <th>Usuario</th>-->
-    <th>RUC</th>
     <th>Dirección</th>
     <!--<th>Estado</th>
     <th>Intentos</th>-->
+
     <th>Actualizado</th>
     <th class="column-options">[]</th>
 </tr>
@@ -25,12 +26,14 @@
 @section("script_master")
 <script type="text/javascript">
     columnsTable = [
+
     	{"data": "name"},
         /*{"data": "full_name"},
         {"data": "last_name"},
         {"data": "user_name"},*/
-        {"data": "number_identifer"},
         {"data": "address"},
+        {"data": "number_identifer"},
+       
         {"data": "status"},
         /*{"data": "num_intentos"},*/
         {"data" : "updated_at"},
@@ -38,6 +41,7 @@
     ];
     confirmDelete["titleMessage"] = "Eliminación de Empresa";
     confirmDelete["textMessage"] = "¿Desea Eliminar este Empresa?";
+
 </script>
 @endsection
 @push("js_master")
@@ -67,6 +71,7 @@
     <div class="form-group">
         <label><input type="checkbox" id="belongs_business"><span>Pertenece a una Empresa</span></label>
     </div>
+
     <div class="form-group">
         <label>Razón Social *</label>
         <input type="text" name="name" class="form-control" />
@@ -78,6 +83,7 @@
     <div class="form-group">
         <label>Dirección *</label>
         <input type="text" name="address" class="form-control" />
+
     </div>
     <div class="form-group">
         <label>Contraseña *</label>

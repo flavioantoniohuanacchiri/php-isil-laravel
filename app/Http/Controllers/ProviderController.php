@@ -3,27 +3,27 @@
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Helpers\ViewHelper;
-use App\Client;
+use App\Provider;
 use DB;
 
-class ClientController extends Controller
+class ProviderController extends Controller
 {
 	public function index(Request $request)
 	{
 		$site = [
-			"name" => "Clientes",
-			"url_controller" => "client",
-			"url" => "client",
+			"name" => "Proveedores",
+			"url_controller" => "provider",
+			"url" => "provider",
 		];
 		if ($request->ajax()) {
 			return datatables()->of(
-	            Client::get()
+	            Provider::get()
 	        )->addColumn('action', function ($data){
                 //return DataTableHelper::buttonsActionsByPerfil(\Auth::user()->profile, $url, $data);
                 return ViewHelper::allButtons($data);
             })->toJson();
 		}
-		return view("client", compact("site"));
+		return view("provider", compact("site"));
 		
 	}
 	public function store(Request $request)
@@ -36,32 +36,28 @@ class ClientController extends Controller
 		try {
 			$obj = null;
 			if (is_null($userId)) {
-				$objTmp = Client::where("document_number", $request->document_number)->first();
+				$objTmp = Provider::where("document_number", $request->document_number)->first();
 				if (!is_null($objTmp)) {
-					return response(["rst" => 2, "obj" => [], "msj" => "Existe un CLiente con Tu Documento"]);
+					return response(["rst" => 2, "obj" => [], "msj" => "Existe un Proveedor con Tu Documento"]);
 				}
-				$obj = new Client;
+				$obj = new Provider;
 			} else {
-				$objTmp = Client::where("document_number", $request->document_number)->where("id", "<>", $userId)->first();
+				$objTmp = Provider::where("document_number", $request->document_number)->where("id", "<>", $userId)->first();
 				if (!is_null($objTmp)) {
-					return response(["rst" => 2, "obj" => [], "msj" => "Existe un Cliente con Tu Documento"]);
+					return response(["rst" => 2, "obj" => [], "msj" => "Existe un Proveedor con Tu Documento"]);
 				}
-				$obj = Client::find($userId);
+				$obj = Provider::find($userId);
 			}
 
-			$obj->first_name = $request->first_name;
-			$obj->last_name = $request->last_name;
-			$obj->full_name = $request->first_name." ".$request->last_name;
+			$obj->name = $request->name;
 			$obj->document_type = $request->document_type;
 			$obj->document_number = $request->document_number;
-			$obj->address = $request->address;
-			$obj->phone = $request->phone;
-			$obj->email = $request->email;
+			$obj->giro = $request->giro;
 			$obj->status = $request->status;
 
 			$obj->save();
 			DB::commit();
-			return response(["rst" => 1, "obj" => $obj, "msj" => "CLiente Creado"]);
+			return response(["rst" => 1, "obj" => $obj, "msj" => "Proveedor Creado"]);
 		} catch (Exception $e) {
 			DB::rollback();
 			return response(["rst" => 2, "obj" => [], "msj" => $e->getMessage()]);
@@ -69,7 +65,7 @@ class ClientController extends Controller
 	}
 	public function show(Request $request)
 	{
-		$keyCache = "showClient";
+		$keyCache = "showProvider";
 		if (!is_null($request->masterId)) {
 			$keyCache.="_".$request->masterId;
 			$masterId = $request->masterId;
@@ -79,7 +75,7 @@ class ClientController extends Controller
 					$keyCache,
 					1*60*60,
 					function() use ($masterId) {
-						return Client::find($masterId);
+						return Provider::find($masterId);
 					}
 				);
 			}
@@ -95,10 +91,10 @@ class ClientController extends Controller
 	public function destroy(Request $request)
 	{
 		$masterId = $request->has("masterId")? $request->masterId : null;
-		$obj = Client::find($masterId);
+		$obj = Provider::find($masterId);
 		if (!is_null($obj)) {
 			$obj->delete();
-			return response(["rst" => 1, "msj" => "Cliente Eliminado Correctamente"]);
+			return response(["rst" => 1, "msj" => "Proveedor Eliminado Correctamente"]);
 		}
 		return response(["rst" => 2, "msj" => "Hubo un Error"]);
 	}

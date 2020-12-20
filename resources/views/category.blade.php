@@ -7,25 +7,26 @@
 </style>
 @endpush
 @section('title_list')
-	Listado de Perfiles
+	Listado de Categorias
 @endsection
 @section('columns_head')
 <tr>
-    <th>Rol</th>
-    <th>Estatus</th>
+    <th>Nombre</th>
+    <th>Estado</th>
+    <th>Actualizado</th>
     <th class="column-options">[]</th>
 </tr>
 @endsection
 @section("script_master")
 <script type="text/javascript">
     columnsTable = [
-        {"data": "rol"},
+    	{"data": "name"},
         {"data": "status"},
         {"data" : "updated_at"},
         {"data": 'action', name: 'action', orderable: false, searchable: false}
     ];
-    confirmDelete["titleMessage"] = "Eliminación de Perfil";
-    confirmDelete["textMessage"] = "¿Desea Eliminar este Perfil?";
+    confirmDelete["titleMessage"] = "Eliminación de la Categoria";
+    confirmDelete["textMessage"] = "¿Desea Eliminar esta Categoria?";
 </script>
 @endsection
 @push("js_master")
@@ -33,7 +34,7 @@
     functionRowTable = function(nRow, aData) {
         if (aData!=null && aData!="null" && aData["status"] !=null && aData["status"] !="null") {
             let htmlTmp = Master.htmlStatus(aData['status']);
-            $(nRow).find('td:eq(4)').html(htmlTmp);
+            $(nRow).find('td:eq(1)').html(htmlTmp);
         }
     };
     $("#belongs_business").click(function(e) {
@@ -53,21 +54,10 @@
 @endpush
 @section("content_form_modal")
     <div class="form-group">
-        <label><input type="checkbox" id="belongs_business"><span>Pertenece a una Area</span></label>
+        <label>Nombre De La Categoria *</label>
+        <input type="text" name="name" class="form-control" />
     </div>
-    <div class="form-group" id="div-business" style="display: none;">
-        <label>Area</label>
-        <select name="business_id" class="form-control select2" data-placeholder="Seleccione una Area" id="businessId" style="width: 100%;">
-            <option value="">Seleccione</option>
-            
-        </select>
-    </div>
-    
-    <div class="form-group">
-        <label>Rol *</label>
-        <input type="text" name="rol" class="form-control" />
-    </div>
-      
+  
     <div class="form-group">
         <label>Estado *</label>
         <select class="form-control select2" name="status" data-placeholder="Seleccione un Estado" style="width: 100%;">

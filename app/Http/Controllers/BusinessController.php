@@ -8,10 +8,12 @@ use App\Profile;
 use App\Business;
 use DB;
 
+
 class BusinessController extends Controller
 {
 	public function index(Request $request)
 	{
+
 		$site = [
 			"name" => "Empresas",
 			"url_controller" => "business",
@@ -20,12 +22,12 @@ class BusinessController extends Controller
 		if ($request->ajax()) {
 			return datatables()->of(
 	            Business::get()
+
 	        )->addColumn('action', function ($data){
                 //return DataTableHelper::buttonsActionsByPerfil(\Auth::user()->profile, $url, $data);
                 return ViewHelper::allButtons($data);
             })->toJson();
 		}
-		return view("business", compact("site"));
 		
 	}
 	public function store(Request $request)
@@ -68,6 +70,7 @@ class BusinessController extends Controller
 			DB::rollback();
 			return response(["rst" => 2, "obj" => [], "msj" => $e->getMessage()]);
 		}
+
 	}
 	public function show(Request $request)
 	{
@@ -89,6 +92,7 @@ class BusinessController extends Controller
 			//return response(["rst" => 1, "obj" => User::with("business", "businessTwo")->find($request->masterId)]);
 		}
 		return response(["rst" => 2, "obj" => [], "msj" => ""]);
+
 	}
 	public function update(Request $request)
 	{
@@ -103,5 +107,6 @@ class BusinessController extends Controller
 			return response(["rst" => 1, "msj" => "Usuario Eliminado Correctamente"]);
 		}
 		return response(["rst" => 2, "msj" => "Hubo un Error"]);
+
 	}
 }

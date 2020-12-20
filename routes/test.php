@@ -19,4 +19,5 @@ Route::get("set-cache", function() {
 });
 Route::get("get-cache", function() {
 	echo \Cache::get("isil");
+
 });
