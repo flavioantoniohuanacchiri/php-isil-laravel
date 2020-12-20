@@ -60,7 +60,7 @@ class CategoryController extends Controller
 	}
 	public function show(Request $request)
 	{
-		$keyCache = "showClient";
+		$keyCache = "showProvider";
 		if (!is_null($request->masterId)) {
 			$keyCache.="_".$request->masterId;
 			$masterId = $request->masterId;
