@@ -147,7 +147,7 @@ renderForm = function(responseObj) {
 	}
 	$("select").trigger("change");
 	$("#staticBackdropLabel").html("");
-	$("#staticBackdropLabel").html(objModel.name+" - Editar "+responseObj.name);
+	$("#staticBackdropLabel").html(objModel.name+" - Editar "+ (responseObj.name != undefined ? responseObj.name : ''));
 };
 renderSetting = function(response) {
 	let arrayTmp = [];

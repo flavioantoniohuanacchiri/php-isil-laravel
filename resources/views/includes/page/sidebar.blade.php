@@ -20,13 +20,9 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link active">
-                        <i class="nav-icon fas fa-circle"></i>
-                            <p>{{trans("layout.sidebar.master")}}
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                            <ul class="nav nav-treeview" >
-                                <li class="nav-item has-treeview">
+
+                            
+                                <!--<li class="nav-item has-treeview">
                                     <a href="/user" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>{{trans("layout.sidebar.user")}}
@@ -41,9 +37,65 @@
                                             <i class="right fas fa-angle-left"></i>
                                         </p>
                                     </a>
+                                </li>-->
+                                <li class="nav-item has-treeview">
+                                    <a href="/product" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>{{trans("layout.sidebar.product")}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
                                 </li>
-                            </ul>
-                    </a>
+                                <li class="nav-item has-treeview">
+                                    <a href="/category" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>{{trans("layout.sidebar.caregory")}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="/attribute" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>{{trans("layout.sidebar.attribute")}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="/attributetype" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>{{trans("layout.sidebar.attributetype")}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="/producthasattribute" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>{{trans("layout.sidebar.producthasattribute")}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="/provider" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>{{trans("layout.sidebar.provider")}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="/sale" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>{{trans("layout.sidebar.sale")}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                </li>
+                            
+                        </li>
             </ul>
             @php
                 $pathUrl = \Request::path();
