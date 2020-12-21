@@ -15,7 +15,7 @@ class BusinessController extends Controller
 		$site = [
 			"name" => "Empresas",
 			"url_controller" => "business",
-			"url" => "business",
+			"url" => "business"
 		];
 		if ($request->ajax()) {
 			return datatables()->of(

@@ -5,8 +5,6 @@ use Illuminate\Http\Request;
 use App\Helpers\ViewHelper;
 use App\User;
 use App\Profile;
-use App\Business;
-use App\Events\UserCreated;
 use DB;
 
 class UserController extends Controller
@@ -17,8 +15,8 @@ class UserController extends Controller
 			"name" => "Usuarios",
 			"url_controller" => "user",
 			"url" => "user",
-			"profile" => Profile::where("status", 1)->get()->toArray(),
-			"business" => Business::where("status", 1)->get()->toArray()
+			"profile" => Profile::where("status", 1)->get()->toArray()
+			
 		];
 		if ($request->ajax()) {
 			return datatables()->of(
@@ -26,10 +24,6 @@ class UserController extends Controller
 	            	"profile" => function($q) {
 	            		$q->select("id", "name");
 	            		//$q->where("status", 0);
-	            	},
-	            	"business" => function($q) {
-	            		$q->select("id", "name", "number_identifer");
-	            		//$q->where("number_identifer", "like", "%35%");
 	            	}
 	        	])->get()
 	        )->addColumn('action', function ($data){
@@ -74,10 +68,8 @@ class UserController extends Controller
 				$obj->password = \Hash::make($request->password);
 			}
 			$obj->save();
+
 			DB::commit();
-			if (is_null($userId)) {
-				event(new UserCreated($obj));
-			}
 			return response(["rst" => 1, "obj" => $obj, "msj" => "Usuario Creado"]);
 		} catch (Exception $e) {
 			DB::rollback();
@@ -86,8 +78,6 @@ class UserController extends Controller
 	}
 	public function show(Request $request)
 	{
-		$business = $obj->business;
-
 		if (!is_null($request->masterId)) {
 			return response(["rst" => 1, "obj" => User::with(["business", "businessTwo"])->find($request->masterId)]);
 		}

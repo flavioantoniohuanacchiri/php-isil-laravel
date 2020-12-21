@@ -7,12 +7,11 @@
 </style>
 @endpush
 @section('title_list')
-	Listado de Perfiles
+	Listado de Categorías
 @endsection
 @section('columns_head')
 <tr>
     <th>Nombre</th>
-    <th>Descripción</th>
     <th>Estado</th>
     <th>Actualizado</th>
     <th class="column-options">Acción</th>
@@ -21,14 +20,13 @@
 @section("script_master")
 <script type="text/javascript">
     columnsTable = [
-        {"data": "name"},
-        {"data": "description"},
+    	{"data": "name"},
         {"data": "status"},
         {"data": "updated_at"},
         {"data": 'action', name: 'action', orderable: false, searchable: false}
     ];
-    confirmDelete["titleMessage"] = "Eliminación de Perfil";
-    confirmDelete["textMessage"] = "¿Desea Eliminar este Perfil?";
+    confirmDelete["titleMessage"] = "Eliminación de Categoría";
+    confirmDelete["textMessage"] = "¿Desea Eliminar esta Categoría?";
 </script>
 @endsection
 @push("js_master")
@@ -36,7 +34,7 @@
     functionRowTable = function(nRow, aData) {
         if (aData!=null && aData!="null" && aData["status"] !=null && aData["status"] !="null") {
             let htmlTmp = Master.htmlStatus(aData['status']);
-            $(nRow).find('td:eq(2)').html(htmlTmp);
+            $(nRow).find('td:eq(1)').html(htmlTmp);
         }
     };
     $("#belongs_business").click(function(e) {
@@ -60,14 +58,10 @@
         <input type="text" name="name" class="form-control" required/>
     </div>
     <div class="form-group">
-        <label>Descripción *</label>
-        <input type="text" name="description" class="form-control" required/>
-    </div>
-    <div class="form-group">
         <label>Estado *</label>
         <select class="form-control select2" name="status" data-placeholder="Seleccione un Estado" style="width: 100%;">
             <option value="">Seleccione</option>
-            <option value="1">Activo</option>
+            <option value="1" selected>Activo</option>
             <option value="0">Inactivo</option>
         </select>
     </div>

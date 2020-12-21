@@ -22,7 +22,26 @@
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link active">
                         <i class="nav-icon fas fa-circle"></i>
-                            <p>{{trans("layout.sidebar.master")}}
+                            <p>{{trans("layout.sidebar.master_sale")}}
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                            <ul class="nav nav-treeview" >
+                                <li class="nav-item has-treeview">
+                                    <a href="/sale" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>{{trans("layout.sidebar.sale")}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
+                    </a>
+            </ul>
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link active">
+                        <i class="nav-icon fas fa-circle"></i>
+                            <p>{{trans("layout.sidebar.master_user")}}
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                             <ul class="nav nav-treeview" >
@@ -38,6 +57,65 @@
                                     <a href="/profile" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>{{trans("layout.sidebar.profile")}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
+                    </a>
+            </ul>
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link active">
+                        <i class="nav-icon fas fa-circle"></i>
+                            <p>{{trans("layout.sidebar.master_maintenance")}}
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                            <ul class="nav nav-treeview" >
+                                <li class="nav-item has-treeview">
+                                    <a href="/product" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>{{trans("layout.sidebar.product")}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="/category" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>{{trans("layout.sidebar.category")}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="/attribute" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>{{trans("layout.sidebar.attribute")}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="/attribute_type" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>{{trans("layout.sidebar.attribute_type")}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="/provider" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>{{trans("layout.sidebar.provider")}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="/customer" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>{{trans("layout.sidebar.customer")}}
                                             <i class="right fas fa-angle-left"></i>
                                         </p>
                                     </a>

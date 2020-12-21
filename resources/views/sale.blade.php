@@ -7,13 +7,13 @@
 </style>
 @endpush
 @section('title_list')
-	Listado de Perfiles
+	Venta
 @endsection
 @section('columns_head')
 <tr>
-    <th>Nombre</th>
-    <th>Descripción</th>
-    <th>Estado</th>
+    <th>Cliente</th>
+    <th>Fecha de compra</th>
+    <th>Total S/</th>
     <th>Actualizado</th>
     <th class="column-options">Acción</th>
 </tr>
@@ -21,14 +21,23 @@
 @section("script_master")
 <script type="text/javascript">
     columnsTable = [
-        {"data": "name"},
-        {"data": "description"},
-        {"data": "status"},
+        {"data": function ( row, type, val, meta ) 
+            {
+                let customer = "";
+                if (row.customer!=null && row.customer !="null") 
+                {
+                    return row.customer.name;
+                }
+            return "";
+            },
+            name: 'customer_id'},
+    	{"data": "created_at"},
+        {"data": "total"},
         {"data": "updated_at"},
         {"data": 'action', name: 'action', orderable: false, searchable: false}
     ];
-    confirmDelete["titleMessage"] = "Eliminación de Perfil";
-    confirmDelete["textMessage"] = "¿Desea Eliminar este Perfil?";
+    confirmDelete["titleMessage"] = "Eliminación de Compra";
+    confirmDelete["textMessage"] = "¿Desea Eliminar esta Compra?";
 </script>
 @endsection
 @push("js_master")
@@ -36,7 +45,7 @@
     functionRowTable = function(nRow, aData) {
         if (aData!=null && aData!="null" && aData["status"] !=null && aData["status"] !="null") {
             let htmlTmp = Master.htmlStatus(aData['status']);
-            $(nRow).find('td:eq(2)').html(htmlTmp);
+            $(nRow).find('td:eq(7)').html(htmlTmp);
         }
     };
     $("#belongs_business").click(function(e) {
@@ -56,19 +65,27 @@
 @endpush
 @section("content_form_modal")
     <div class="form-group">
-        <label>Nombre *</label>
-        <input type="text" name="name" class="form-control" required/>
-    </div>
-    <div class="form-group">
-        <label>Descripción *</label>
-        <input type="text" name="description" class="form-control" required/>
-    </div>
-    <div class="form-group">
-        <label>Estado *</label>
-        <select class="form-control select2" name="status" data-placeholder="Seleccione un Estado" style="width: 100%;">
+        <label>Cliente * </label>
+        <select name="customer_id" class="form-control select2" data-placeholder="Seleccione un Cliente" style="width: 100%;">
             <option value="">Seleccione</option>
-            <option value="1">Activo</option>
-            <option value="0">Inactivo</option>
+            @if(isset($site["customer"]))
+                @foreach($site["customer"] as $key => $value)
+                <option value="{{$value['id']}}">{{$value['name']}}</option>
+                @endforeach
+            @endif
         </select>
     </div>
+    <div class="form-group">
+        <label>Producto * </label>
+        <select name="product_id" class="form-control select2" data-placeholder="Seleccione un Producto" style="width: 100%;">
+            <option value="">Seleccione</option>
+            @if(isset($site["product"]))
+                @foreach($site["product"] as $key => $value)
+                <option value="{{$value['id']}}">{{$value['name']}}</option>
+                @endforeach
+            @endif
+        </select>
+    </div>
+
+
 @endsection

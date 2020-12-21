@@ -7,39 +7,40 @@
 </style>
 @endpush
 @section('title_list')
-	Listado de Usuarios
+	Listado de Atributos
 @endsection
 @section('columns_head')
 <tr>
-    <th>Nombres</th>
-    <th>Email</th>
-    <th>Perfil</th>
+    <th>Código</th> 
+    <th>Atributo</th> 
+    <th>Tipo de Atributo</th> 
     <th>Estado</th>
     <th>Actualizado</th>
     <th class="column-options">Acción</th>
 </tr>
 @endsection
-@section("script_master")
+@section("script_master")     
 <script type="text/javascript">
     columnsTable = [
-    	{"data": "name"},
-        {"data": "email"},
+        {"data": "code"},
+        {"data": "name"},
+        //{"data": "attribute_type_id"},
         {"data": function ( row, type, val, meta ) 
             {
-                let profile = "";
-                if (row.profile!=null && row.profile !="null") 
+                let attribute_type = "";
+                if (row.attribute_type!=null && row.attribute_type !="null") 
                 {
-                    return row.profile.name;
+                    return row.attribute_type.name;
                 }
             return "";
             },
-            name: 'profile_id'},
+            name: "attribute_type_id"},
         {"data": "status"},
         {"data": "updated_at"},
         {"data": 'action', name: 'action', orderable: false, searchable: false}
     ];
-    confirmDelete["titleMessage"] = "Eliminación de Usuario";
-    confirmDelete["textMessage"] = "¿Desea Eliminar este Usuario?";
+    confirmDelete["titleMessage"] = "Eliminación de Atributo";
+    confirmDelete["textMessage"] = "¿Desea Eliminar este Atributo?";
 </script>
 @endsection
 @push("js_master")
@@ -65,47 +66,31 @@
     });
 </script>
 @endpush
-@section("content_form_modal")
+@section("content_form_modal")   
     <div class="form-group">
-        <label>Nombres *</label>
-        <input type="text" name="full_name" class="form-control" required/>
+        <label>Código *</label>
+        <input type="text" name="code" class="form-control solo-enteros" minlength="5" maxlength="5" required/>
     </div>
     <div class="form-group">
-        <label>Apellidos *</label>
-        <input type="text" name="last_name" class="form-control" required />
-    </div>
+        <label>Atributo *</label>
+        <input type="text" name="name" class="form-control" required/>
+    </div> 
     <div class="form-group">
-        <label>Email *</label>
-        <input type="email" name="email" class="form-control" required/>
-    </div>
-    <div class="form-group">
-        <label>Nombre de Usuario *</label>
-        <input type="text" name="user_name" class="form-control" required />
-    </div>
-    <div class="form-group">
-        <label>DNI *</label>
-        <input type="text" name="document_number" class="form-control solo-enteros" minlength="8" maxlength="8" required />
-    </div>
-    <div class="form-group">
-        <label>Perfiles</label>
-        <select name="profile_id" class="form-control select2" data-placeholder="Seleccione un Perfil" style="width: 100%;">
+        <label>Tipo de Atributo * </label>
+        <select class="form-control select2" name="attribute_type_id" data-placeholder="Seleccione un Tipo de Atributo" style="width: 100%;">
             <option value="">Seleccione</option>
-            @if(isset($site["profile"]))
-            	@foreach($site["profile"] as $key => $value)
-            	<option value="{{$value['id']}}">{{$value['name']}}</option>
-            	@endforeach
+            @if(isset($site["attribute_type"]))
+                @foreach($site["attribute_type"] as $key => $value)
+                <option value="{{$value['id']}}">{{$value['name']}}</option>
+                @endforeach
             @endif
         </select>
-    </div>
-    <div class="form-group">
-        <label>Contraseña *</label>
-        <input type="text" name="password" class="form-control" required/>
-    </div>
+    </div>    
     <div class="form-group">
         <label>Estado *</label>
         <select class="form-control select2" name="status" data-placeholder="Seleccione un Estado" style="width: 100%;">
             <option value="">Seleccione</option>
-            <option value="1">Activo</option>
+            <option value="1" selected>Activo</option>
             <option value="0">Inactivo</option>
         </select>
     </div>
