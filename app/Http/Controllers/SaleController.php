@@ -43,16 +43,8 @@ class SaleController extends Controller
 		try {
 			$obj = null;
 			if (is_null($userId)) {
-				$objTmp = Sale::where("id_client", $request->id_client)->first();
-				if (!is_null($objTmp)) {
-					return response(["rst" => 2, "obj" => [], "msj" => "Existe una venta con ese cliente"]);
-				}
 				$obj = new Sale;
 			} else {
-				$objTmp = Sale::where("id_client", $request->id_client)->where("id", "<>", $userId)->first();
-				if (!is_null($objTmp)) {
-					return response(["rst" => 2, "obj" => [], "msj" => "Existe una venta con ese cliente"]);
-				}
 				$obj = Sale::find($userId);
 			}
 

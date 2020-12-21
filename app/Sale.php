@@ -6,6 +6,6 @@ class Sale extends BaseModel
 
 	public function client()
 	{
-		return $this->hasMany("App\Client", "id", "id_client");
+		return $this->hasOne("App\Client", "id", "id_client");
 	}
 }

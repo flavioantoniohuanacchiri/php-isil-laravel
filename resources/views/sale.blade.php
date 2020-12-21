@@ -7,7 +7,7 @@
 </style>
 @endpush
 @section('title_list')
-	Listado de Productos
+	Listado de Ventas
 @endsection
 @section('columns_head')
 <tr>
@@ -30,12 +30,11 @@
         }, name: 'id_client'},
         {"data": "fcompra"},
         {"data": "total"},
-        
         {"data" : "updated_at"},
         {"data": 'action', name: 'action', orderable: false, searchable: false}
     ];
-    confirmDelete["titleMessage"] = "Eliminación de Producto";
-    confirmDelete["textMessage"] = "¿Desea Eliminar este Producto?";
+    confirmDelete["titleMessage"] = "Eliminación de Venta";
+    confirmDelete["textMessage"] = "¿Desea Eliminar este Venta?";
 </script>
 @endsection
 @push("js_master")
@@ -66,9 +65,9 @@
 @section("content_form_modal")
    
     <div class="form-group">
-        <a class="btn btn-primary" style="float: right" href="category" target="_blank"><i class="fas fa-plus"></i></a>
+        <a class="btn btn-primary" style="float: right" href="client" target="_blank"><i class="fas fa-plus"></i></a>
         <label>Nombre Del Cliente * </label>
-        <select class="form-control select2" name="id_client" data-placeholder="Seleccione un Estado" style="width: 100%;">
+        <select class="form-control select2" name="id_client" data-placeholder="Seleccione un Cliente" style="width: 100%;">
             <option value="">Seleccione</option>
             @if(isset($site["client"]))
                 @foreach($site["client"] as $key => $value)
