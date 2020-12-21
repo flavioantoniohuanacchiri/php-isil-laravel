@@ -1,7 +1,7 @@
 @extends('layouts.page')
 @push("css")
 <style type="text/css">
-    #belong-profile{
+    #belong-ventas{
         margin-right: 15px;
     }
 </style>

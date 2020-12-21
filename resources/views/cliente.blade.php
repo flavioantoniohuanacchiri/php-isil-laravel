@@ -1,18 +1,19 @@
 @extends('layouts.page')
 @push("css")
 <style type="text/css">
-    #belong-tipo{
+    #belong-cliente{
         margin-right: 15px;
     }
 </style>
 @endpush
 @section('title_list')
-	Listado de Tipos
+  Listado de Clientes
 @endsection
 @section('columns_head')
 <tr>
     <th>Codigo</th>
     <th>Descripcion</th>
+    <th>Venta</th>
     <th>Estado</th> 
     <th>Actualizado</th>
     <th class="column-options">[]</th>
@@ -21,14 +22,20 @@
 @section("script_master")
 <script type="text/javascript">
     columnsTable = [
-    	{"data": "code"},
+      {"data": "code"},
         {"data": "name"},
+        {"data": function (row,type,val,meta) {
+            let ventas="";
+            if (row.ventas !=null && row.ventas !="null"){
+                return row.ventas.name;
+            } return "";
+        },name: 'ventas_id'},
         {"data": "status"},  
         {"data" : "updated_at"},
         {"data": 'action', name: 'action', orderable: false, searchable: false}
     ];
-    confirmDelete["titleMessage"] = "Eliminación de la tipo";
-    confirmDelete["textMessage"] = "¿Desea Eliminar esta tipo?";
+    confirmDelete["titleMessage"] = "Eliminación del Articulo";
+    confirmDelete["textMessage"] = "¿Desea Eliminar este Articulo?";
 </script>
 @endsection
 @push("js_master")
@@ -36,11 +43,11 @@
     functionRowTable = function(nRow, aData) {
         if (aData!=null && aData!="null" && aData["status"] !=null && aData["status"] !="null") {
             let htmlTmp = Master.htmlStatus(aData['status']);
-            $(nRow).find('td:eq(2)').html(htmlTmp);
+            $(nRow).find('td:eq(3)').html(htmlTmp);
         }
     };
     $("#mdlStore").on("hide.bs.modal", function(event) {
-        $("#tipoId").val([]).trigger("change");
+        $("#ventasId").val([]).trigger("change");
     });
 </script>
 @endpush
@@ -54,6 +61,18 @@
         <label>Descripción *</label>
         <input type="text" name="name" class="form-control" required />
     </div>
+    <div class="form-group">
+        <label>ventas</label>
+        <select name="ventas_id" class="form-control select2" data-placeholder="Seleccione una ventas" style="width: 100%;">
+            <option value="">Seleccione</option>
+            @if(isset($site["ventas"]))
+              @foreach($site["ventas"] as $key => $value)
+              <option value="{{$value['id']}}">{{$value['name']}}</option>
+              @endforeach
+            @endif
+        </select>
+    </div>
+
     <div class="form-group" >
         <label>Estado *</label>
         <select class="form-control select2" name="status" data-placeholder="Seleccione un Estado" style="width: 100%;">

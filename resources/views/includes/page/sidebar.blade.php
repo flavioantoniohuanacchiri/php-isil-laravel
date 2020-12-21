@@ -50,22 +50,6 @@
                                     </p>
                                 </a>
                             </li>
-                            <li class="nav-item has-treeview">
-                                <a href="/Ventas" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>{{trans("layout.sidebar.ventas")}}
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item has-treeview">
-                                <a href="/cliente" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>{{trans("layout.sidebar.cliente")}}
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-                            </li>
                         </ul>
                     </a>
                 </li>
@@ -287,21 +271,22 @@
                         </p>
                         <ul class="nav nav-treeview" >
                             <li class="nav-item has-treeview">
-                                <a href="/user" class="nav-link active">
+                                <a href="/cliente" class="nav-link active">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>{{trans("layout.sidebar.Cliente")}}
+                                    <p>{{trans("layout.sidebar.cliente")}}
                                         <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
                             </li>
                             <li class="nav-item has-treeview">
-                                <a href="/profile" class="nav-link">
+                                <a href="/ventas" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>{{trans("layout.sidebar.Ventas")}}
+                                    <p>{{trans("layout.sidebar.ventas")}}
                                         <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
                             </li>
+                            
                         </ul>
                     </a>
                 </li>

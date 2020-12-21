@@ -55,3 +55,13 @@ Route::get("/tipo", "TipoController@index");
 Route::post("/tipo/store", "TipoController@store");
 Route::get("/tipo/show", "TipoController@show");
 Route::post("/tipo/destroy", "TipoController@destroy");
+
+Route::get("/ventas", "VentasController@index");
+Route::post("/ventas/store", "VentasController@store");
+Route::get("/ventas/show", "VentasController@show");
+Route::post("/ventas/destroy", "VentasController@destroy");
+
+Route::get("/cliente", "ClienteController@index");
+Route::post("/cliente/store", "ClienteController@store");
+Route::get("/cliente/show", "ClienteController@show");
+Route::post("/cliente/destroy", "ClienteController@destroy");

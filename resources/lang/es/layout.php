@@ -9,11 +9,11 @@ return [
 		"profetion"=>"Profesiones",
 		"master" => "Negocio",
 		"mante"  => "Mantenimiento",
-		"articulo" =>"Articulos",
+		"articulos" =>"Articulos",
 		"tipo"=>"Tipo",
 		"categoria"=>"Categoria",
-		"Cliente"=>"Cliente",
-		"Ventas"=>"Ventas",
+		"cliente"=>"Cliente",
+		"ventas"=>"Ventas",
 
 	]
 ];
