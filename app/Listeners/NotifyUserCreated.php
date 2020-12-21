@@ -27,12 +27,12 @@ class NotifyUserCreated
      */
     public function handle(UserCreated $event)
     {
-        $data = array('name' => $event->user->name, 'email' => $event->user->email, 'body' => 'Bienvenido a mi sitio personal en donde comparto artículos de desarrollo web.');
- 
+        $data = array('name' => $event->user->full_name." ".$event->user->last_name, 'email' => $event->user->email, 'body' => 'Bienvenido a mi sitio personal en donde comparto artículos de desarrollo web.');
+
         \Mail::send('emails.user.created', $data, function($message) use ($data) {
             $message->to($data['email'])
-                    ->subject('Bienvenido a Gabriel Chávez');
-            //$message->from('contacto@gabrielchavez.me');
+                    ->subject('Bienvenido a ISIL, '.$data["name"]);
+            $message->from('contacto@gabrielchavez.me');
         });
     }
 }
