@@ -16,6 +16,28 @@
 CREATE DATABASE IF NOT EXISTS `php-isil` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `php-isil`;
 
+-- Volcando estructura para tabla php-isil.attribute_type
+CREATE TABLE IF NOT EXISTS `attribute_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(45) NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `status` tinyint(2) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- Volcando datos para la tabla php-isil.attribute_type: ~0 rows (aproximadamente)
+DELETE FROM `attribute_type`;
+/*!40000 ALTER TABLE `attribute_type` DISABLE KEYS */;
+INSERT INTO `attribute_type` (`id`, `code`, `name`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+	(1, '123', 'Small', 1, '2020-12-20 04:05:49', '2020-12-21 18:18:16', '2020-12-21 18:18:16'),
+	(2, '1', 'Contenido', 1, '2020-12-21 18:19:41', '2020-12-21 18:19:41', NULL),
+	(3, '2', 'Color', 1, '2020-12-21 18:30:30', '2020-12-21 18:30:30', NULL),
+	(4, '3', 'Tamanio', 1, '2020-12-21 18:35:59', '2020-12-21 18:36:49', NULL);
+/*!40000 ALTER TABLE `attribute_type` ENABLE KEYS */;
+
 -- Volcando estructura para tabla php-isil.attribute
 CREATE TABLE IF NOT EXISTS `attribute` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -48,28 +70,6 @@ INSERT INTO `attribute` (`id`, `code`, `name`, `status`, `attribute_type_id`, `c
 	(11, '8', 'A4', 1, 4, '2020-12-21 18:37:10', '2020-12-21 18:37:10', NULL),
 	(12, '9', 'Carta', 1, 4, '2020-12-21 18:37:22', '2020-12-21 18:37:22', NULL);
 /*!40000 ALTER TABLE `attribute` ENABLE KEYS */;
-
--- Volcando estructura para tabla php-isil.attribute_type
-CREATE TABLE IF NOT EXISTS `attribute_type` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `code` varchar(45) NOT NULL,
-  `name` varchar(100) DEFAULT NULL,
-  `status` tinyint(2) NOT NULL DEFAULT 1,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-
--- Volcando datos para la tabla php-isil.attribute_type: ~0 rows (aproximadamente)
-DELETE FROM `attribute_type`;
-/*!40000 ALTER TABLE `attribute_type` DISABLE KEYS */;
-INSERT INTO `attribute_type` (`id`, `code`, `name`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-	(1, '123', 'Small', 1, '2020-12-20 04:05:49', '2020-12-21 18:18:16', '2020-12-21 18:18:16'),
-	(2, '1', 'Contenido', 1, '2020-12-21 18:19:41', '2020-12-21 18:19:41', NULL),
-	(3, '2', 'Color', 1, '2020-12-21 18:30:30', '2020-12-21 18:30:30', NULL),
-	(4, '3', 'Tamanio', 1, '2020-12-21 18:35:59', '2020-12-21 18:36:49', NULL);
-/*!40000 ALTER TABLE `attribute_type` ENABLE KEYS */;
 
 -- Volcando estructura para tabla php-isil.business
 CREATE TABLE IF NOT EXISTS `business` (
@@ -281,26 +281,6 @@ INSERT INTO `provider` (`id`, `name`, `document_type`, `document_number`, `giro`
 	(1, 'ISIL', 'RUC', '20100134455', 'Educación', 1, '2020-12-20 05:54:53', '2020-12-20 05:55:14', NULL),
 	(2, 'Taylor S.A', 'RUC', '22342321222', 'Industria', 1, '2020-12-21 18:26:50', '2020-12-21 18:26:50', NULL);
 /*!40000 ALTER TABLE `provider` ENABLE KEYS */;
-
--- Volcando estructura para tabla php-isil.provider_has_products
-CREATE TABLE IF NOT EXISTS `provider_has_products` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_provider` int(11) NOT NULL,
-  `id_product` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_provider` (`id_provider`,`id_product`),
-  KEY `fk_provider_has_products_product` (`id_product`),
-  CONSTRAINT `fk_provider_has_products_product` FOREIGN KEY (`id_product`) REFERENCES `product` (`id`),
-  CONSTRAINT `fk_provider_has_products_provider` FOREIGN KEY (`id_provider`) REFERENCES `provider` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Volcando datos para la tabla php-isil.provider_has_products: ~0 rows (aproximadamente)
-DELETE FROM `provider_has_products`;
-/*!40000 ALTER TABLE `provider_has_products` DISABLE KEYS */;
-/*!40000 ALTER TABLE `provider_has_products` ENABLE KEYS */;
 
 -- Volcando estructura para tabla php-isil.sale
 CREATE TABLE IF NOT EXISTS `sale` (
