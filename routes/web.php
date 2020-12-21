@@ -79,6 +79,11 @@ Route::post("/producthasattribute/store", "ProductHasAttributeController@store")
 Route::get("/producthasattribute/show", "ProductHasAttributeController@show");
 Route::post("/producthasattribute/destroy", "ProductHasAttributeController@destroy");
 
+/*Route::get("/providerhasproduct", "ProviderHasProductController@index");
+Route::post("/providerhasproduct/store", "ProviderHasProductController@store");
+Route::get("/providerhasproduct/show", "ProviderHasProductController@show");
+Route::post("/providerhasproduct/destroy", "ProviderHasProductController@destroy");*/
+
 Route::get("/sale", "SaleController@index");
 Route::post("/sale/store", "SaleController@store");
 Route::get("/sale/show", "SaleController@show");

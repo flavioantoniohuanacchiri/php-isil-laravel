@@ -12,16 +12,17 @@ class SaleController extends Controller
 	public function index(Request $request)
 	{
 		$site = [
-			"name" => "Compras",
+			"name" => "Ventas",
 			"url_controller" => "sale",
 			"url" => "sale",
 			"client" => Client::where("status", 1)->get()->toArray(),
 		];
-		/*if ($request->ajax()) {
+
+		if ($request->ajax()) {
 			return datatables()->of(
-	            Product::with([
-	            	"category" => function($q) {
-	            		$q->select("id", "name");
+	            Sale::with([
+	            	"client" => function($q) {
+	            		$q->select("id", "full_name");
 	            		//$q->where("status", 0);
 	            	}
 	        	])->get()
@@ -29,41 +30,35 @@ class SaleController extends Controller
                 //return DataTableHelper::buttonsActionsByPerfil(\Auth::user()->profile, $url, $data);
                 return ViewHelper::allButtons($data);
             })->toJson();
-		}*/
+		}
+
 		return view("sale", compact("site"));
 		
 	}
 	public function store(Request $request)
 	{
 		$userId = $request->has("masterId")? $request->masterId : null;
-		if ($request->code == "") {
-			return response(["rst" => 2, "obj" => [], "msj" => "Necesita Ingresar un Código"]);
+
+		if ($request->id_client == "") {
+			return response(["rst" => 2, "obj" => [], "msj" => "Necesita Ingresar un Cliente"]);
+
 		}
 		DB::beginTransaction();
 		try {
 			$obj = null;
 			if (is_null($userId)) {
-				$objTmp = Product::where("code", $request->code)->first();
-				if (!is_null($objTmp)) {
-					return response(["rst" => 2, "obj" => [], "msj" => "Existe un Producto con ese código"]);
-				}
-				$obj = new Product;
+				$obj = new Sale;
 			} else {
-				$objTmp = Product::where("code", $request->code)->where("id", "<>", $userId)->first();
-				if (!is_null($objTmp)) {
-					return response(["rst" => 2, "obj" => [], "msj" => "Existe un Producto con ese código"]);
-				}
-				$obj = Product::find($userId);
+				$obj = Sale::find($userId);
 			}
 
-			$obj->code = $request->code;
-			$obj->name = $request->name;
-			$obj->status = $request->status;
-			$obj->category_id = $request->category_id;
-
+			$obj->id_client = $request->id_client;
+			$obj->fcompra = $request->fcompra;
+			$obj->total = $request->total;
+			
 			$obj->save();
 			DB::commit();
-			return response(["rst" => 1, "obj" => $obj, "msj" => "Producto Creado"]);
+			return response(["rst" => 1, "obj" => $obj, "msj" => "Venta Creada"]);
 		} catch (Exception $e) {
 			DB::rollback();
 			return response(["rst" => 2, "obj" => [], "msj" => $e->getMessage()]);
@@ -71,7 +66,7 @@ class SaleController extends Controller
 	}
 	public function show(Request $request)
 	{
-		$keyCache = "showProduct";
+		$keyCache = "showSale";
 		if (!is_null($request->masterId)) {
 			$keyCache.="_".$request->masterId;
 			$masterId = $request->masterId;
@@ -81,12 +76,11 @@ class SaleController extends Controller
 					$keyCache,
 					1*60*60,
 					function() use ($masterId) {
-						return Product::find($masterId);
+						return Sale::find($masterId);
 					}
 				);
 			}
-
-			return response(["rst" => 1, "obj" => $obj::with(["category"])->find($request->masterId)]);
+			return response(["rst" => 1, "obj" => $obj::with(["client"])->find($request->masterId)]);
 
 			//return response(["rst" => 1, "obj" => $obj]);
 
@@ -101,10 +95,11 @@ class SaleController extends Controller
 	public function destroy(Request $request)
 	{
 		$masterId = $request->has("masterId")? $request->masterId : null;
-		$obj = Product::find($masterId);
+
+		$obj = Sale::find($masterId);
 		if (!is_null($obj)) {
 			$obj->delete();
-			return response(["rst" => 1, "msj" => "Producto Eliminado Correctamente"]);
+			return response(["rst" => 1, "msj" => "Venta Eliminada Correctamente"]);
 		}
 		return response(["rst" => 2, "msj" => "Hubo un Error"]);
 	}
