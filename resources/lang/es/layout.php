@@ -15,5 +15,6 @@ return [
 		"sale" => "Ventas"
 		"saledetail" => "Detalles Ventas"
 
+
 	]
 ];
