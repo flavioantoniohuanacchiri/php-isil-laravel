@@ -24,7 +24,7 @@ class UserController extends Controller
 			return datatables()->of(
 	            User::with([
 	            	"profile" => function($q) {
-	            		$q->select("id", "name");
+	            		$q->select("id", "rol");
 	            		//$q->where("status", 0);
 	            	},
 	            	"business" => function($q) {
@@ -62,13 +62,14 @@ class UserController extends Controller
 				}
 				$obj = User::find($userId);
 			}
-			$obj->name = $request->full_name." ".$request->full_name;
+			$obj->name = $request->full_name." ".$request->last_name;
 			$obj->full_name = $request->full_name;
 			$obj->last_name = $request->last_name;
 			$obj->email = $request->email;
 			$obj->user_name = $request->user_name;
 			$obj->document_number = $request->document_number;
 			$obj->profile_id = $request->profile_id;
+			$obj->status = $request->status;
 
 			if ($request->password !="") {
 				$obj->password = \Hash::make($request->password);
@@ -76,7 +77,7 @@ class UserController extends Controller
 			$obj->save();
 			DB::commit();
 			if (is_null($userId)) {
-				event(new UserCreated($obj));
+				//event(new UserCreated($obj));
 			}
 			return response(["rst" => 1, "obj" => $obj, "msj" => "Usuario Creado"]);
 		} catch (Exception $e) {

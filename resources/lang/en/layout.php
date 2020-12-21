@@ -9,7 +9,10 @@ return [
 		"category" => "Categories",
 		"attribute" => "Attributes",
 		"attributetype" => "Attributes Type",
-		"producthasattributes" => "Product Attributes",
-		"provider" => "Provider",
+		"producthasattribute" => "Product Attributes",
+		"client" => "Clients",
+		"provider" => "Providers",
+		"sale" => "Sales",
+		"saledetail" => "Sale Details"
 	]
 ];

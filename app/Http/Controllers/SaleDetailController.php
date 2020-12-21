@@ -16,18 +16,29 @@ class SaleDetailController extends Controller
 			"name" => "Detalle Compra",
 			"url_controller" => "saledetail",
 			"url" => "saledetail",
-			"sale" => Sale::where("status", 1)->get()->toArray(),
-			"producthasattribute" => ProductHasAttribute::where("status", 1)->get()->toArray()
+			"sale" => Sale::get()->toArray(),
+			"producthasattribute" => ProductHasAttribute::with([
+										"product" => function($q){
+											$q->select("id","name");
+										},
+										"attribute" => function($q){
+											$q->select("id","name");
+										}
+									])->get()->toArray(),
 		];
 		if ($request->ajax()) {
 			return datatables()->of(
 	            SaleDetail::with([
 	            	"sale" => function($q) {
-	            		$q->select("id", "name");
+	            		$q->select("id", "id");
 	            		//$q->where("status", 0);
 	            	},
-	            	"producthasattribute" => function($q) {
-	            		$q->select("id", "name");
+	            	"producthasattribute.product" => function($q) {
+	            		$q->select("id","name");
+	            		//$q->where("status", 0);
+	            	},
+	            	"producthasattribute.attribute" => function($q) {
+	            		$q->select("id","name");
 	            		//$q->where("status", 0);
 	            	},
 	        	])->get()
@@ -54,17 +65,52 @@ class SaleDetailController extends Controller
 
 			$obj->quantity = $request->quantity;
 			$obj->unit_price = $request->unit_price;
-			$obj->total = $request->total;
+			$obj->total = $request->quantity * $request->unit_price;
 			$obj->sale_id = $request->sale_id;
 			$obj->product_has_attribute_id = $request->product_has_attribute_id;
 
 			$obj->save();
+
+			$obj_sale = Sale::where("id",$request->sale_id)->first();
+			$obj_saledetail = SaleDetail::where("sale_id",$request->sale_id)->get();
+
+ 			$total = 0;
+
+			foreach ($obj_saledetail as $key => $value) {
+				$total += $value['total'];
+			}
+
+			$obj_sale->total = $total;
+
+			$obj_sale->save();
+
 			DB::commit();
 			return response(["rst" => 1, "obj" => $obj, "msj" => "Detalle Compra Creada"]);
 		} catch (Exception $e) {
 			DB::rollback();
 			return response(["rst" => 2, "obj" => [], "msj" => $e->getMessage()]);
 		}
+
+		DB::beginTransaction();
+		try {
+			$obj_sale = Sale::where("id",$request->sale_id)->first();
+			$obj_saledetail = SaleDetail::where("sale_id",$request->sale_id)->get();
+
+ 			$total = 0;
+
+			/*foreach ($obj_d as $key => $value) {
+				$total += $value['total'];
+			}*/
+
+			$obj_sale->total = 5;
+
+			$obj_sale->save();
+
+			DB::commit();
+		} catch (Exception $e) {
+			DB::rollback();
+		}
+
 	}
 	public function show(Request $request)
 	{

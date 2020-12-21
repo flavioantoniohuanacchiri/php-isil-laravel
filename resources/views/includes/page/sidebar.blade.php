@@ -22,8 +22,8 @@
                 <li class="nav-item has-treeview">
 
                             
-                                <!--<li class="nav-item has-treeview">
-                                    <a href="/user" class="nav-link active">
+                                <li class="nav-item has-treeview">
+                                    <a href="/user" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>{{trans("layout.sidebar.user")}}
                                             <i class="right fas fa-angle-left"></i>
@@ -37,7 +37,7 @@
                                             <i class="right fas fa-angle-left"></i>
                                         </p>
                                     </a>
-                                </li>-->
+                                </li>
                                 <li class="nav-item has-treeview">
                                     <a href="/product" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
@@ -49,7 +49,7 @@
                                 <li class="nav-item has-treeview">
                                     <a href="/category" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>{{trans("layout.sidebar.caregory")}}
+                                        <p>{{trans("layout.sidebar.category")}}
                                             <i class="right fas fa-angle-left"></i>
                                         </p>
                                     </a>
@@ -79,6 +79,14 @@
                                     </a>
                                 </li>
                                 <li class="nav-item has-treeview">
+                                    <a href="/client" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>{{trans("layout.sidebar.client")}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item has-treeview">
                                     <a href="/provider" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>{{trans("layout.sidebar.provider")}}
@@ -94,7 +102,14 @@
                                         </p>
                                     </a>
                                 </li>
-                            
+                                <li class="nav-item has-treeview">
+                                    <a href="/saledetail" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>{{trans("layout.sidebar.saledetail")}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                </li>
                         </li>
             </ul>
             @php

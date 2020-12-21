@@ -11,8 +11,9 @@
 @endsection
 @section('columns_head')
 <tr>
+    <th>Código de venta</th>
     <th>Nombre del Cliente</th>
-    <th>Fecha de Compra</th>
+    <th>Fecha de Venta</th>
     <th>Total</th>
     <th>Actualizado</th>
     <th class="column-options">[]</th>
@@ -21,6 +22,7 @@
 @section("script_master")
 <script type="text/javascript">
     columnsTable = [
+        {"data": "id"},
     	{"data": function ( row, type, val, meta ) {
             let client = "";
             if (row.client!=null && row.client !="null") {
@@ -67,7 +69,7 @@
     <div class="form-group">
         <a class="btn btn-primary" style="float: right" href="client" target="_blank"><i class="fas fa-plus"></i></a>
         <label>Nombre Del Cliente * </label>
-        <select class="form-control select2" name="id_client" data-placeholder="Seleccione un Cliente" style="width: 100%;">
+        <select class="form-control select2" name="id_client" data-placeholder="Seleccione un Cliente" style="width: 100%;" required>
             <option value="">Seleccione</option>
             @if(isset($site["client"]))
                 @foreach($site["client"] as $key => $value)
@@ -77,11 +79,11 @@
         </select>
     </div>
     <div class="form-group">
-        <label>Fecha de Compra *</label>
-        <input type="text" name="fcompra" class="form-control" />
+        <label>Fecha de Venta *</label>
+        <input type="date" name="fcompra" class="form-control" required />
     </div>
     <div class="form-group">
-        <label>Total *</label>
-        <input type="number" name="total" class="form-control" required />
+        <label>Total (Se autocalculará al agregar el detalle) *</label>
+        <input type="number" name="total" class="form-control"n readonly value="0" />
     </div>
 @endsection

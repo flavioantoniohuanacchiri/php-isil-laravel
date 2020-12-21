@@ -2,7 +2,7 @@
 
 class SaleDetail extends BaseModel
 {
-	protected $table = "saledetail";
+	protected $table = "sale_detail";
 
 	public function sale()
 	{
