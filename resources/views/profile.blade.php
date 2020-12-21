@@ -13,6 +13,7 @@
 <tr>
     <th>Rol</th>
     <th>Estatus</th>
+    <th>Actualizado</th>
     <th class="column-options">[]</th>
 </tr>
 @endsection
@@ -33,7 +34,7 @@
     functionRowTable = function(nRow, aData) {
         if (aData!=null && aData!="null" && aData["status"] !=null && aData["status"] !="null") {
             let htmlTmp = Master.htmlStatus(aData['status']);
-            $(nRow).find('td:eq(4)').html(htmlTmp);
+            $(nRow).find('td:eq(2)').html(htmlTmp);
         }
     };
     $("#belongs_business").click(function(e) {
