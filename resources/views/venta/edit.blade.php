@@ -12,7 +12,7 @@
             @csrf
             @method('PUT')
             <div class="form-group {{ $errors->has('customer_name') ? 'has-error' : '' }}">
-                <label for="customer_name">Nombre del cliente*</label>
+                <label for="customer_name">Nombre del cliente</label>
                 <input type="text" id="nombre_cliente" name="nombre_cliente" class="form-control" value="{{ old('nombre_cliente', isset($venta) ? $venta->nombre_cliente : '') }}" required>
                 @if($errors->has('nombre_cliente'))
                     <em class="invalid-feedback">
@@ -33,7 +33,7 @@
             </div>
             <div class="card">
                 <div class="card-header">
-                    Productos
+                    Selección de Productos
                 </div>
 
                 <div class="card-body">
@@ -69,18 +69,18 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <p><a  id="add_row" class="btn btn-default pull-left" href="#" role="button"  >+ Add Row</a></p>
-                            <p><a id='delete_row' class="pull-right btn btn-danger" href="#" role="button"  >- Delete Row</a></p>
+                            <button id="add_row" class="btn btn-default pull-left">+ Add Row</button>
+                            <button id='delete_row' class="pull-right btn btn-danger">- Delete Row</button>
                         </div>
                     </div>
                 </div>
             </div>
             <div>
-                <input class="btn btn-danger" type="submit" value="Grabar">
+                <input style="margin-top:20px;" class="btn btn-danger" type="submit" value="Grabar">
+                <a style="margin-top:20px;" class="btn btn-default" href="{{ url()->previous() }}">
+                Regresar</a>
             </div>
-            <a style="margin-top:20px;" class="btn btn-default" href="{{ url()->previous() }}">
-                Regresar
-            </a>
+            
         </form>
     </div>
 </div>

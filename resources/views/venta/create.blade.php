@@ -4,14 +4,14 @@
     <div class="container-fluid">
 <div class="card">
     <div class="card-header">
-        Venta
+        Venta de Productos
     </div>
 
     <div class="card-body">
         <form action="{{ route('venta.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group {{ $errors->has('nombre_cliente') ? 'has-error' : '' }}">
-                <label for="nombre_cliente">Nombre del cliente*</label>
+                <label for="nombre_cliente">Nombre del cliente</label>
                 <input type="text" id="nombre_cliente" name="nombre_cliente" class="form-control" value="{{ old('nombre_cliente', isset($venta) ? $venta->nombre_cliente : '') }}" required>
                 @if($errors->has('nombre_cliente'))
                     <em class="invalid-feedback">
@@ -31,7 +31,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    Productos
+                    Selección de Productos
                 </div>
 
                 <div class="card-body">
@@ -75,11 +75,11 @@
                 </div>
             </div>
             <div>
-                <input class="btn btn-danger" type="submit" value="Grabar">
+                <input style="margin-top:20px;" class="btn btn-danger" type="submit" value="Grabar">
+                <a style="margin-top:20px;" class="btn btn-default" href="{{ url()->previous() }}">
+                Regresar </a>
             </div>
-            <a style="margin-top:20px;" class="btn btn-default" href="{{ url()->previous() }}">
-                Regresar
-            </a>
+            
         </form>
     </div>
 </div>

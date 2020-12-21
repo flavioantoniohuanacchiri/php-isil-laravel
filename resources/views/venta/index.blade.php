@@ -9,21 +9,22 @@
 <section class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12">
-                
-                <div style="margin-bottom: 10px;" class="row">
-                    <div class="col-lg-12">
-                        <a class="btn btn-success" href="{{ route('venta.create') }}">
-                            Agregar
-                        </a>
-                    </div>
-                </div>
+            <div class="col-12">                              
             
                 <div class="card">
                     <div class="card-header">
-                        Ventas
+                        Detalle de Ventas
                     </div>
                     <div class="card-body">
+
+                    <div style="margin-bottom: 10px;" class="row">
+                        <div class="col-lg-12">
+                            <a class="btn btn-success" href="{{ route('venta.create') }}">
+                                Agregar
+                            </a>
+                        </div>
+                    </div>
+
                         <table id="table-list" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
@@ -103,13 +104,13 @@
 <script type="text/javascript" src="{{asset('js/master/default.js')}}"></script>
 <script type="text/javascript">
     var tableList = $("#table-list").DataTable({
-      "paging": true,
       "lengthChange": true,
       "searching": true,
       "ordering": true,
       "info": true,
-      "autoWidth": false,
+      "autoWidth": true,
       "responsive": true,
+      "paging": true,
     });
     $("select").select2();
     if (objModel!=null && objModel !="null") {
