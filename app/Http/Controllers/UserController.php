@@ -7,8 +7,13 @@ use App\User;
 use App\Profile;
 use App\Business;
 
+
 //use App\Events\UserCreated;
 
+
+use App\Events\UserCreated;
+use App\Handlers\Interfaces\UserInterface;
+>>>>>>> master
 use DB;
 
 class UserController extends Controller
@@ -52,14 +57,16 @@ class UserController extends Controller
 		return view("user", compact("site"));
 		
 	}
-	public function store(Request $request)
-	{
+	public function store(
+		Request $request,
+		UserInterface $userInterface
+	){
 		$userId = $request->has("masterId")? $request->masterId : null;
 		if ($request->document_number == "") {
 			return response(["rst" => 2, "obj" => [], "msj" => "Necesita Ingresar un Documento"]);
 		}
-		DB::beginTransaction();
-		try {
+		//DB::beginTransaction();
+		//try {
 			$obj = null;
 			if (is_null($userId)) {
 				$objTmp = User::where("document_number", $request->document_number)->first();
@@ -74,6 +81,7 @@ class UserController extends Controller
 				}
 				$obj = User::find($userId);
 			}
+
 			$obj->name = $request->full_name." ".$request->last_name;
 			$obj->full_name = $request->full_name;
 			$obj->last_name = $request->last_name;
@@ -92,15 +100,28 @@ class UserController extends Controller
 			/*if (is_null($userId)) {
 				event(new UserCreated($obj));
 			}*/
+
+			if (is_null($userId)) {
+				return response($userInterface->create($request->all()));
+			} else {
+				return response($userInterface->update($userId, $request->all()));
+			}
+			//DB::commit();
+			if (is_null($userId)) {
+				//event(new UserCreated($obj));
+			}
+
 			return response(["rst" => 1, "obj" => $obj, "msj" => "Usuario Creado"]);
-		} catch (Exception $e) {
-			DB::rollback();
-			return response(["rst" => 2, "obj" => [], "msj" => $e->getMessage()]);
-		}
+		//} catch (Exception $e) {
+			//DB::rollback();
+			//return response(["rst" => 2, "obj" => [], "msj" => $e->getMessage()]);
+		//}
 	}
 	public function show(Request $request)
 	{
+
 		//$business = $obj->business;
+
 
 		if (!is_null($request->masterId)) {
 			return response(["rst" => 1, "obj" => User::with(["business", "businessTwo"])->find($request->masterId)]);

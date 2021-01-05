@@ -1,1 +1,2 @@
-<h1>Correo de Prueba</h1>
+<h1>Bienvenido {{$name}}</h1>
+<p>{{$body}}</p>

@@ -1,0 +1,4 @@
+1. Crear la interface App\Handlers\Interfaces\BusinessInterface;
+2. Crear la implementacion App\Handlers\Repository\BusinessRepository;
+3. Actualizar el servicio App\Handlers\HandlerServiceProvider, añadiendo la relacion entre interface y repository en el metodo register.
+4. En el controlador App\Http\Controllers\BusinessController, modificar el metodo store para implementar inyeccion de dependencias.

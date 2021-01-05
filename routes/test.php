@@ -1,6 +1,7 @@
 <?php
 
 use App\Business;
+
 Route::get("test-business", function() {
 	try {
 		$obj = new Business;
@@ -54,3 +55,11 @@ Route::get("set-cache", function() {
 Route::get("get-cache", function() {
 	echo \Cache::get("isil");
 });
+
+Route::get("test-user/{userId}", function($userId) {
+	$user = \DB::select("CALL showUser(?)", [$userId]);
+	echo "<pre>";
+	print_r($user);
+	echo "</pre>";
+});
+Route::get("test-user-pdf", "TestController@getPDFUser");
