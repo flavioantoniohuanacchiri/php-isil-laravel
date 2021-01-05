@@ -4,7 +4,7 @@ use App\Handlers\Interfaces\BusinessInterface;
 use App\Business;
 use DB;
 
-class BusinesssRepository implements BusinessInterface
+class BusinessRepository implements BusinessInterface
 {
 	public function create($business = []) {
 		DB::beginTransaction();

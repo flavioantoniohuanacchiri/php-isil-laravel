@@ -3,14 +3,12 @@
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Helpers\ViewHelper;
-
 use App\User;
 use App\Profile;
 use App\Business;
-use DB;
-
 use App\Events\BusinessCreated;
 use App\Handlers\Interfaces\BusinessInterface;
+use DB;
 
 class BusinessController extends Controller
 {
@@ -43,7 +41,7 @@ class BusinessController extends Controller
 			return response(["rst" => 2, "obj" => [], "msj" => "Necesita Ingresar un RUC"]);
 		}
 		DB::beginTransaction();
-		try {
+		//try {
 			$obj = null;
 
 			if (is_null($businessId)) {
@@ -73,10 +71,10 @@ class BusinessController extends Controller
 			//DB::rollback();
 			//return response(["rst" => 2, "obj" => [], "msj" => $e->getMessage()]);
 
-	}
-	public function show(Request $request)
-	{
-		$keyCache = "showBusiness";
+	} 
+	 public function show(Request $request)
+    {
+        $keyCache = "showBusiness";
 		if (!is_null($request->masterId)) {
 			$keyCache.="_".$request->masterId;
 			$masterId = $request->masterId;
@@ -91,10 +89,9 @@ class BusinessController extends Controller
 				);
 			}
 			return response(["rst" => 1, "obj" => $obj]);
-			//return response(["rst" => 1, "obj" => User::with("business", "businessTwo")->find($request->masterId)]);
 		}
 		return response(["rst" => 2, "obj" => [], "msj" => ""]);
-	}
+    }
 	public function update(Request $request)
 	{
 		
