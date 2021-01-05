@@ -9,6 +9,9 @@ use App\Profile;
 use App\Business;
 use DB;
 
+use App\Events\BusinessCreated;
+use App\Handlers\Interfaces\BusinessInterface;
+
 class BusinessController extends Controller
 {
 	public function index(Request $request)
@@ -29,7 +32,10 @@ class BusinessController extends Controller
 		return view("business", compact("site"));
 		
 	}
-	public function store(Request $request)
+	public function store(
+		Request $request,
+		BusinessInterface $businessInterface
+	)
 	{
 
 		$businessId = $request->has("masterId")? $request->masterId : null;
@@ -53,20 +59,19 @@ class BusinessController extends Controller
 				}
 				$obj = Business::find($businessId);
 			}
-			$obj->name = $request->name;
-			$obj->address = $request->address;
-			$obj->ubigeo = $request->ubigeo;
-			$obj->number_identifer = $request->number_identifer;
-
-			$obj->save();
-			DB::commit();
+			if (is_null($businessId)) {
+				return response($businessInterface->create($request->all()));
+			} else {
+				return response($businessInterface->update($businessId, $request->all()));
+			}
+			//DB::commit();
+			if (is_null($businessId)) {
+				//event(new UserCreated($obj));
+			}
 			return response(["rst" => 1, "obj" => $obj, "msj" => "Empresa Creada"]);
-		} catch (Exception $e) {
-			DB::rollback();
-			return response(["rst" => 2, "obj" => [], "msj" => $e->getMessage()]);
-		}
-
-		//print_r($request->all()); dd();
+		//} catch (Exception $e) {
+			//DB::rollback();
+			//return response(["rst" => 2, "obj" => [], "msj" => $e->getMessage()]);
 
 	}
 	public function show(Request $request)

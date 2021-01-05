@@ -7,5 +7,6 @@ class HandlerServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind('App\Handlers\Interfaces\UserInterface', 'App\Handlers\Repository\UserRepository');
+        $this->app->bind('App\Handlers\Interfaces\BusinessInterface', 'App\Handlers\Repository\BusinessRepository');
     }
 }

@@ -6,14 +6,8 @@ use App\Helpers\ViewHelper;
 use App\User;
 use App\Profile;
 use App\Business;
-
-
-//use App\Events\UserCreated;
-
-
 use App\Events\UserCreated;
 use App\Handlers\Interfaces\UserInterface;
->>>>>>> master
 use DB;
 
 class UserController extends Controller
@@ -29,15 +23,6 @@ class UserController extends Controller
 		];
 		if ($request->ajax()) {
 			return datatables()->of(
-	            User::with(["profile" => function($q){
-	            	$q->select("id","name");
-	            },
-	            "business" => function($q) {
-	            	$q->select("id","name", "number_identifer");
-	            	//$q->where("number_identifer","like","%35%");
-	            }
-	        ])->get()
-/*
 	            User::with([
 	            	"profile" => function($q) {
 	            		$q->select("id", "name");
@@ -48,7 +33,6 @@ class UserController extends Controller
 	            		//$q->where("number_identifer", "like", "%35%");
 	            	}
 	        	])->get()
-*/
 	        )->addColumn('action', function ($data){
                 //return DataTableHelper::buttonsActionsByPerfil(\Auth::user()->profile, $url, $data);
                 return ViewHelper::allButtons($data);
@@ -81,26 +65,6 @@ class UserController extends Controller
 				}
 				$obj = User::find($userId);
 			}
-
-			$obj->name = $request->full_name." ".$request->last_name;
-			$obj->full_name = $request->full_name;
-			$obj->last_name = $request->last_name;
-			$obj->email = $request->email;
-			$obj->user_name = $request->user_name;
-			$obj->document_number = $request->document_number;
-			$obj->profile_id = $request->profile_id;
-			$obj->business_id = $request->business_id; 
-			$obj->status = $request->status;
-
-			if ($request->password !="") {
-				$obj->password = \Hash::make($request->password);
-			}
-			$obj->save();
-			DB::commit();
-			/*if (is_null($userId)) {
-				event(new UserCreated($obj));
-			}*/
-
 			if (is_null($userId)) {
 				return response($userInterface->create($request->all()));
 			} else {
@@ -110,7 +74,6 @@ class UserController extends Controller
 			if (is_null($userId)) {
 				//event(new UserCreated($obj));
 			}
-
 			return response(["rst" => 1, "obj" => $obj, "msj" => "Usuario Creado"]);
 		//} catch (Exception $e) {
 			//DB::rollback();
@@ -119,10 +82,6 @@ class UserController extends Controller
 	}
 	public function show(Request $request)
 	{
-
-		//$business = $obj->business;
-
-
 		if (!is_null($request->masterId)) {
 			return response(["rst" => 1, "obj" => User::with(["business", "businessTwo"])->find($request->masterId)]);
 		}
