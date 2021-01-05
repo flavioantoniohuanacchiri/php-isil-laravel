@@ -8,6 +8,7 @@ use App\Profile;
 use App\Business;
 use App\Events\UserCreated;
 use App\Handlers\Interfaces\UserInterface;
+use Validator;
 use DB;
 
 class UserController extends Controller
@@ -46,6 +47,14 @@ class UserController extends Controller
 		UserInterface $userInterface
 	){
 		$userId = $request->has("masterId")? $request->masterId : null;
+		$validator = Validator::make($request->all(), [
+			"document_number" => "required",
+			"user_name" => "required|max:10|regex:/^[0-9a-zA-Z]+$/"
+		]);
+		if ($validator->fails()) {
+			//print_r($validator->messages()->get("*")); dd();
+			return response(["rst" => 2, "msj" => $validator->messages()->first()]);
+		}
 		if ($request->document_number == "") {
 			return response(["rst" => 2, "obj" => [], "msj" => "Necesita Ingresar un Documento"]);
 		}

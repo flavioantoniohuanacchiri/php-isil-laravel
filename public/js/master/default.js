@@ -91,7 +91,7 @@ var Default = {
 			data : formData+"&_token="+$("[name=_token]").val(),
 			success : function(response) {
 				removeLoading();
-				if (response.rst!=2 && response.rst !="2") {
+				if (parseInt(response.rst) == 1) {
 					Page.messages.success(response.msj);
 					$("#mdlStore").modal("hide");
 					tableList = Default.list(objModel.url_controller, columnsTable);
