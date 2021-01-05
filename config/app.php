@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Barryvdh\Snappy\ServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
+        App\Handlers\HandlerServiceProvider::class,
     ],
 
     /*
