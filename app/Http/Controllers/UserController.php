@@ -48,8 +48,9 @@ class UserController extends Controller
 	){
 		$userId = $request->has("masterId")? $request->masterId : null;
 		$validator = Validator::make($request->all(), [
-			"document_number" => "required",
-			"user_name" => "required|max:10|regex:/^[0-9a-zA-Z]+$/"
+			"document_number" => "required|unique:users",
+			"user_name" => "required|max:50|regex:/^[0-9a-zA-Z]+$/",
+			"password" => "regex:/^[0-9a-zA-Z]+$/"
 		]);
 		if ($validator->fails()) {
 			//print_r($validator->messages()->get("*")); dd();
