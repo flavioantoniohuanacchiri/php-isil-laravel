@@ -7,6 +7,7 @@ use App\User;
 use App\Profile;
 use App\Business;
 use DB;
+use Validator;
 
 class BusinessController extends Controller
 {
@@ -31,6 +32,9 @@ class BusinessController extends Controller
 	public function store(Request $request)
 	{
 		$userId = $request->has("masterId")? $request->masterId : null;
+		$validator = Validator::make($request->all(), [
+			"document_number" => "required|size:11",
+		]);
 		if ($request->document_number == "") {
 			return response(["rst" => 2, "obj" => [], "msj" => "Necesita Ingresar un Documento"]);
 		}

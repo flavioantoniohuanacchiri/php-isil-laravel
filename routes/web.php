@@ -35,3 +35,4 @@ Route::get("/business", "BusinessController@index");
 Route::post("/business/store", "BusinessController@store");
 Route::get("/business/show", "BusinessController@show");
 Route::post("/business/destroy", "BusinessController@destroy");
+Route::get('email', 'EmailController@sendEmail');

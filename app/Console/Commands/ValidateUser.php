@@ -32,7 +32,18 @@ class ValidateUser extends Command
     public function handle()
     {
         $lastDate = !is_null($this->option("last_date"))? $this->option("last_date") : date("Y-m-d");
-        $users = User::whereRaw("DATE(created_at) >= '{$lastDate}' ")->get()->toArray();
+        $users = User::whereRaw("DATE(created_at) >= '{$lastDate}' ")
+          ->where("status", 1)
+          ->get()->toArray();
+
+        $users2 = User::whereRaw("DATE(created_at) >= '{$lastDate}' ")
+          ->where("status", 1)
+          ->update("status", 0);
+
+        foreach ($users as $key => $value) {
+              User::where("id", $value["id"])->update("status", 0);
+              echo "El usuario :".$value["name"]. "Ha sido Desactivado!!! \n";
+        }
         print_r($users);
         echo "Hola, probando proceso!!!";
     }
